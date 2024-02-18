@@ -3,5 +3,6 @@ A ReactJS Web application that lets you upload receipts and seleect who has paid
 
 
 Commands:
-1. npm install
-2. npm install @mui/material
+1. npm init
+2. npm install
+3. npm install @mui/material
