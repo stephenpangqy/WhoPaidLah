@@ -6,3 +6,7 @@ Commands:
 1. npm init
 2. npm install
 3. npm install @mui/material
+4. npm install react-router-dom
+5. npm install @emotion/react
+6. npm install @emotion/styled
+7. npm install @mui/icons-material

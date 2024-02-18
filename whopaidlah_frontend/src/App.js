@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
 import {
 	AppBar,
 	Box,
@@ -20,12 +19,13 @@ import {
   InputLabel,
   FormControl
 } from "@mui/material";
+import MainPage from "./pages/MainPage"
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/main" element={<br></br>}  />
+        <Route exact path="/" element={<MainPage />}  />
       </Routes>
     </BrowserRouter>
   );
