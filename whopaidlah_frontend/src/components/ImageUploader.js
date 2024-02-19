@@ -43,18 +43,23 @@ const VisuallyHiddenInput = styled('input')({
 function ImageUploader() {
     const [uploadedFile, setUploadedFile] = useState(null);
 
-    const handleFileChange = (event) => {
+    const handleImageUpload = (event) => {
         setUploadedFile(event.target.files[0]);
+        console.log("Uploaded", event.target.files[0]);
+        let fileName = event.target.files[0].name
+        // Check if it is an image (.png, .jpeg, .jpg)
+        if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
+            console.log("File is image");
+            // Process File and send to API Endpoitn for image processing
+            const formData = new FormData();
+            formData.append('image', event.target.files[0])
+            // Send to backend to process image
+        }
+        else {
+            console.log("This is not an image. Please only upload .jpeg, .jpg or .png files.")
+        }
     };
 
-    const handleUpload = () => {
-        if (uploadedFile) {
-            console.log("File received", uploadedFile.name);
-            console.log(uploadedFile);
-        } else {
-            console.log("No file selected");
-        }
-    }
 
     return (
         <Button
@@ -63,10 +68,9 @@ function ImageUploader() {
             variant="contained"
             tabIndex={-1}
             startIcon={<CloudUploadIcon />}
-            onClick={handleUpload}
             >
-            Upload file
-            <VisuallyHiddenInput onChange={handleFileChange} type="file" />
+            Upload Image
+            <VisuallyHiddenInput onChange={handleImageUpload} type="file" />
         </Button>
     )
 }
