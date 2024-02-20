@@ -1,11 +1,19 @@
-from flask import Flask
+from flask import Flask, request
 from flask_restx import Api, Resource, reqparse, Namespace
+from flask_cors import CORS
 import os
 import sys
 import logging
 
+import pytesseract
+from PIL import Image
+from io import BytesIO
+
+
 app = Flask(__name__)
 api = Api(app = app)
+
+CORS(app)
 
 # Loggers for API Activity
 logger = logging.getLogger('werkzeug')
@@ -26,8 +34,18 @@ class ProcessImage(Resource):
     @api.doc(description="Takes in a JSOn of an image file, and processes it to return TBA", parser=processImage_parser)
     def post(self):
         try:
-            image_arguments = processImage_parser.parse_args()
-            print(image_arguments)
+            print(request.files)
+            image_file = request.files.get('image')
+            print(image_file)
+            
+            # Read the image data into a PIL Image object
+            img = Image.open(BytesIO(image_file.read()))
+            
+            # Use pytesseract to extract text from the image
+            extracted_text = pytesseract.image_to_string(img)
+
+            # Print the extracted text
+            print(extracted_text)
             
             return {
                 'message': 'Success'

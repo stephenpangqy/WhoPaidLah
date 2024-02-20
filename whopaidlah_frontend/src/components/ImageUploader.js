@@ -51,12 +51,11 @@ function ImageUploader() {
         // Check if it is an image (.png, .jpeg, .jpg)
         if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
             console.log("File is image");
-            // Process File and send to API Endpoitn for image processing
-            const formData = new FormData();
-            formData.append('image', event.target.files[0])
-            console.log(formData)
-            // TO DO: FIX THIS
+            // Process File and send to API Endpoitn for image processin
             // Send to backend to process image
+            console.log(event.target.files[0])
+            let formData = new FormData();
+            formData.append('image', event.target.files[0]);
             axios.post('http://localhost:5000/whopaidlah/processImage', formData)
             .then(response => {
                 console.log(response);

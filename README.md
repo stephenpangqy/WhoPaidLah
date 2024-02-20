@@ -10,3 +10,7 @@ npm install @emotion/react
 npm install @emotion/styled
 npm install @mui/icons-material
 npm install axios
+
+
+Resources:
+https://pypi.org/project/pytesseract/
