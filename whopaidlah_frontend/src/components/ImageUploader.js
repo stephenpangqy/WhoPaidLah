@@ -27,6 +27,7 @@ import {
 } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
+import axios from 'axios';
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -53,7 +54,17 @@ function ImageUploader() {
             // Process File and send to API Endpoitn for image processing
             const formData = new FormData();
             formData.append('image', event.target.files[0])
+            console.log(formData)
+            // TO DO: FIX THIS
             // Send to backend to process image
+            axios.post('http://localhost:5000/whopaidlah/processImage', formData)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+
+            });
+
         }
         else {
             console.log("This is not an image. Please only upload .jpeg, .jpg or .png files.")
