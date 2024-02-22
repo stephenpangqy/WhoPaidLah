@@ -14,3 +14,7 @@ npm install axios
 
 Resources:
 https://pypi.org/project/pytesseract/
+https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/
+
+Troubleshoot Help:
+https://stackoverflow.com/questions/46004859/winerror-5access-denied-pytesseract

@@ -128,3 +128,229 @@ main.py : ProcessImage Failed. name 'request' is not defined
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 126-303-450
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+main.py : ProcessImage Failed. tesseract is not installed or it's not in your PATH. See README file for more information.
+127.0.0.1 - - [22/Feb/2024 15:11:21] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+main.py : ProcessImage Failed. 13
+127.0.0.1 - - [22/Feb/2024 15:49:57] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 15:50:26] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 15:51:50] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:06:11] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:07:14] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:10:20] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:11:23] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:11:57] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:12:30] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:13:15] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:13:34] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [22/Feb/2024 16:19:20] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:23:25] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:24:11] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:24:51] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:25:23] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:42:00] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:43:06] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:43:42] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [22/Feb/2024 16:44:47] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:46:13] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [22/Feb/2024 16:47:30] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [22/Feb/2024 16:47:40] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151

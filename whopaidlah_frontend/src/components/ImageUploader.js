@@ -46,7 +46,6 @@ function ImageUploader() {
 
     const handleImageUpload = (event) => {
         setUploadedFile(event.target.files[0]);
-        console.log("Uploaded", event.target.files[0]);
         let fileName = event.target.files[0].name
         // Check if it is an image (.png, .jpeg, .jpg)
         if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
