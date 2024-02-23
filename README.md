@@ -15,6 +15,14 @@ npm install axios
 Resources:
 https://pypi.org/project/pytesseract/
 https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/
+https://www.youtube.com/watch?v=ON_JubFRw8M&ab_channel=Murtaza%27sWorkshop-RoboticsandAI
+https://www.computervision.zone/lessons/document-scanner-video-lesson/
+
 
 Troubleshoot Help:
 https://stackoverflow.com/questions/46004859/winerror-5access-denied-pytesseract
+https://stackoverflow.com/questions/40136070/ipython-cv2-imwrite-not-saving-image
+
+To Look at:
+https://cloud.google.com/vision
+https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html

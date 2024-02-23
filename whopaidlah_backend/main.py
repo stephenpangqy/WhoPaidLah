@@ -28,7 +28,7 @@ logger.addHandler(logging.StreamHandler(sys.stdout))
 # Set PyTesseract PATH to the executable
 pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ASUS\\Documents\\Tesseract-OCR\\tesseract.exe"
 # Set PyTesseract Config (https://muthu.co/all-tesseract-ocr-options/)
-pytesseract_config = r'--psm 6'
+pytesseract_config = r'--psm 32 --oem 1'
 
 # Creating Parsers for API Routes that take in parameters (For Swagger)
 processImage_parser = reqparse.RequestParser()
@@ -49,20 +49,20 @@ class ProcessImage(Resource):
             img = Image.open(BytesIO(image_file.read()))
             
             # Use pytesseract to extract text from the image
-            # extracted_text = pytesseract.image_to_string(img, config=pytesseract_config)
+            extracted_text = pytesseract.image_to_string(img, config=pytesseract_config)
 
-            # Using CV2 and PyTesseract OCR
+            # # Using CV2 and PyTesseract OCR
             # Load the image using OpenCV
-            image = np.array(img)
+            # image = np.array(img)
 
-            # Convert the image to grayscale
-            gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+            # # Convert the image to grayscale
+            # gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
-            # Apply thresholding to preprocess the image
-            _, threshold_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
+            # # Apply thresholding to preprocess the image
+            # _, threshold_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
 
-            # Perform OCR on the preprocessed image
-            extracted_text = pytesseract.image_to_string(threshold_image)
+            # # Perform OCR on the preprocessed image
+            # extracted_text = pytesseract.image_to_string(threshold_image)
 
             
 

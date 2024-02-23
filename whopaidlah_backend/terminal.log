@@ -354,3 +354,51 @@ main.py : ProcessImage Failed. 13
  * Restarting with stat
  * Debugger is active!
  * Debugger PIN: 164-524-151
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 11:58:01] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 11:59:07] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 12:00:09] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 12:04:28] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 12:05:02] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [23/Feb/2024 12:05:40] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
