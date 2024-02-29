@@ -26,3 +26,8 @@ https://stackoverflow.com/questions/40136070/ipython-cv2-imwrite-not-saving-imag
 To Look at:
 https://cloud.google.com/vision
 https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
+
+GCLOUD Documentation
+https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
+https://cloud.google.com/sdk/docs/install
+https://cloud.google.com/vision/docs/ocr?cloudshell=true
