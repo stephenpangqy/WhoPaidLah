@@ -31,3 +31,7 @@ GCLOUD Documentation
 https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
 https://cloud.google.com/sdk/docs/install
 https://cloud.google.com/vision/docs/ocr?cloudshell=true
+
+EDEN AI:
+https://app.edenai.run/bricks/ocr/ocr-receipt
+https://www.youtube.com/watch?v=NrSjwk1jBy4&t=2s&ab_channel=EdenAI

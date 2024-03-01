@@ -8,9 +8,11 @@ import logging
 import pytesseract
 from PIL import Image
 from io import BytesIO
+import tempfile
 import cv2
 import np
 
+from eden_ocr import send_ocr_scan
 
 app = Flask(__name__)
 api = Api(app = app)
@@ -25,10 +27,10 @@ logger.addHandler(handler)
 # Comment below line if you dont want any logs to appear in the terminal
 logger.addHandler(logging.StreamHandler(sys.stdout))
 
-# Set PyTesseract PATH to the executable
-pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ASUS\\Documents\\Tesseract-OCR\\tesseract.exe"
-# Set PyTesseract Config (https://muthu.co/all-tesseract-ocr-options/)
-pytesseract_config = r'--psm 32 --oem 1'
+# # Set PyTesseract PATH to the executable
+# pytesseract.pytesseract.tesseract_cmd = r"C:\\Users\\ASUS\\Documents\\Tesseract-OCR\\tesseract.exe"
+# # Set PyTesseract Config (https://muthu.co/all-tesseract-ocr-options/)
+# pytesseract_config = r'--psm 32 --oem 1'
 
 # Creating Parsers for API Routes that take in parameters (For Swagger)
 processImage_parser = reqparse.RequestParser()
@@ -47,9 +49,17 @@ class ProcessImage(Resource):
             
             # Read the image data into a PIL Image object
             img = Image.open(BytesIO(image_file.read()))
+
+            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
+            temp_file.write(image_file) #### TODO:  FIX THIS
+            temp_file.close()
+            image_path = temp_file.name
+            receipt_items = send_ocr_scan(image_path)
+            print(receipt_items)
+
             
-            # Use pytesseract to extract text from the image
-            extracted_text = pytesseract.image_to_string(img, config=pytesseract_config)
+            # # Use pytesseract to extract text from the image
+            # extracted_text = pytesseract.image_to_string(img, config=pytesseract_config)
 
             # # Using CV2 and PyTesseract OCR
             # Load the image using OpenCV

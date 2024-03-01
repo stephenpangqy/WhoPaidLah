@@ -15,6 +15,8 @@ def detect_text(path):
 
     response = client.text_detection(image=image)
     texts = response.text_annotations
+    print("JSON:")
+    # print(texts)
     print("Texts:")
 
     for text in texts:
@@ -33,4 +35,4 @@ def detect_text(path):
         )
 
 
-# run_quickstart()
+detect_text('./img/receipt7.jpg')
