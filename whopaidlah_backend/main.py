@@ -9,8 +9,8 @@ import pytesseract
 from PIL import Image
 from io import BytesIO
 import tempfile
-import cv2
-import np
+# import cv2
+# import np
 
 from eden_ocr import send_ocr_scan
 
@@ -42,18 +42,13 @@ class ProcessImage(Resource):
     @api.response(500, "Internal Error with ProcessImage")
     @api.doc(description="Takes in a JSON of an image file, and processes it to return TBA", parser=processImage_parser)
     def post(self):
-        # try:
+        try:
             print(request.files)
             image_file = request.files.get('image')
             print(image_file)
             
-            # Read the image data into a PIL Image object
-            img = Image.open(BytesIO(image_file.read()))
-
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix='.jpg')
-            temp_file.write(image_file) #### TODO:  FIX THIS
-            temp_file.close()
-            image_path = temp_file.name
+            image_path = os.path.join(os.getcwd(), image_file.filename)
+            image_file.save(image_path)
             receipt_items = send_ocr_scan(image_path)
             print(receipt_items)
 
@@ -73,20 +68,20 @@ class ProcessImage(Resource):
 
             # # Perform OCR on the preprocessed image
             # extracted_text = pytesseract.image_to_string(threshold_image)
-
-            
-
-            # Print the extracted text
-            print(extracted_text)
             
             return {
                 'message': 'Success'
             }, 201
-        # except Exception as e:
-        #     logger.error(f"{os.path.basename(__file__)} : ProcessImage Failed. {e.args[0]}")
-        #     return {
-        #         "message": f"ProcessImage failed. {e.args[0]}"
-        #     }, 500
+        except Exception as e:
+            logger.error(f"{os.path.basename(__file__)} : ProcessImage Failed. {e.args[0]}")
+            return {
+                "message": f"ProcessImage failed. {e.args[0]}"
+            }, 500
+        finally:
+            # Remove the file after processing
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                # print(f'File {image_path} removed successfully')
 
 
 # Namespaces for API Route Categorization ############################
