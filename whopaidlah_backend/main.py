@@ -9,8 +9,8 @@ import pytesseract
 from PIL import Image
 from io import BytesIO
 import tempfile
-import cv2
-import np
+# import cv2
+# import np
 
 from eden_ocr import send_ocr_scan
 
