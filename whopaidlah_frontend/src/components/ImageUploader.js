@@ -1,28 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-	AppBar,
-	Box,
-	Toolbar,
-	IconButton,
-	Menu,
-	MenuItem,
-	Container,
-	Link,
-    Grid,
-    Stack,
-    TextField,
-    Autocomplete,
-    Typography,
-    Select,
-    InputLabel,
-    FormControl,
-    List,
-    ListSubheader,
-    ListItemButton,
-    ListItemText,
-    ListItemIcon,
-    Collapse,
-    InputAdornment,
     Button,
 } from "@mui/material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -44,13 +21,17 @@ const VisuallyHiddenInput = styled('input')({
 function ImageUploader() {
     const [uploadedFile, setUploadedFile] = useState(null);
 
+    useEffect(() => {
+    
+    },[])
+
     const handleImageUpload = (event) => {
         setUploadedFile(event.target.files[0]);
         let fileName = event.target.files[0].name
         // Check if it is an image (.png, .jpeg, .jpg)
         if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
             console.log("File is image");
-            // Process File and send to API Endpoitn for image processin
+            // Process File and send to API Endpoint for image processing
             // Send to backend to process image
             console.log(event.target.files[0])
             let formData = new FormData();
