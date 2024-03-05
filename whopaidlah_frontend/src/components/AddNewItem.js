@@ -14,12 +14,18 @@ function AddNewItem( { submitNewItem }) {
     const [isLoading, setIsLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 
-    const { handleSubmit, control } = useForm({
-        defaultValues: { },
+    const { handleSubmit, control, formState: { isSubmitting } } = useForm({
+        defaultValues: { item_name: "", quantity: "", cost: "" },
 	});
 
-    const onSubmit = () => {
-        // TO DO: Adding of Item to append to the table
+    const onSubmit = ({ item_name, quantity, cost}) => {
+        setIsLoading(true);
+        setIsDisabled(true);
+
+        submitNewItem(item_name, quantity, cost)
+
+        setIsLoading(false);
+        setIsDisabled(false);
     }
 
     return (

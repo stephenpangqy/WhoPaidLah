@@ -12,6 +12,7 @@ npm install @mui/icons-material
 npm install @mui/lab
 npm install react-hook-form
 npm install axios
+npm install react-beautiful-dnd
 
 
 Resources:
@@ -20,6 +21,10 @@ https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just
 https://www.youtube.com/watch?v=ON_JubFRw8M&ab_channel=Murtaza%27sWorkshop-RoboticsandAI
 https://www.computervision.zone/lessons/document-scanner-video-lesson/
 
+React-Draggable
+https://www.npmjs.com/package/react-draggable
+https://github.com/atlassian/react-beautiful-dnd
+https://dev.to/bryntum/best-drag-and-drop-libraries-for-frontend-developers-39d5
 
 Troubleshoot Help:
 https://stackoverflow.com/questions/46004859/winerror-5access-denied-pytesseract

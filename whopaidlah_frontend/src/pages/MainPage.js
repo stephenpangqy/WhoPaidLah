@@ -18,7 +18,21 @@ function MainPage() {
     const [isAddItem, setIsAddItem] = useState(false);
 
     function onClickAddItem() {
-        setIsAddItem(true)
+        setIsAddItem(true);
+    }
+
+    function onClickDontAddItem() {
+        setIsAddItem(false);
+    }
+
+    function addToReceiptData(itemName, quantity, cost) {
+        // Add more fields here if deemed necessary
+        let dataRow = {
+            'description': itemName,
+            'quantity': quantity,
+            'amount_line': cost
+        }
+        setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
     }
 
     function dummyOnClick() {
@@ -68,16 +82,22 @@ function MainPage() {
                         </Grid>
                         <Grid item xs={6}>
                             <ButtonGroup variant="contained">
-                                <Button variant="contained" size="medium" sx={{backgroundColor: 'orange', p: 1}} onClick={onClickAddItem}>
-                                    Add New Items
-                                </Button>
+                                {!!isAddItem ? (
+                                    <Button variant="contained" size="medium" sx={{backgroundColor: 'orange', p: 1}} onClick={onClickDontAddItem}>
+                                        Stop Adding Items
+                                    </Button>
+                                ): (
+                                    <Button variant="contained" size="medium" sx={{backgroundColor: 'orange', p: 1}} onClick={onClickAddItem}>
+                                        Add New Items
+                                    </Button>
+                                )}
                                 <Button variant="contained" size="medium" sx={{p: 3}} color='success'>
                                     Proceed
                                 </Button>
                             </ButtonGroup>
                         </Grid>
                         {!!isAddItem ? (
-                            <AddNewItem />
+                            <AddNewItem submitNewItem={addToReceiptData} />
                         ) : (
                             <>
                             </>
