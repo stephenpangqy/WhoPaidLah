@@ -16,6 +16,7 @@ import AddNewItem from '../components/AddNewItem';
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
     const [isAddItem, setIsAddItem] = useState(false);
+    const [isAddNames, setIsAddNames] = useState(false);
 
     function onClickAddItem() {
         setIsAddItem(true);
