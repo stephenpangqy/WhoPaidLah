@@ -25,6 +25,8 @@ React-Draggable
 https://www.npmjs.com/package/react-draggable
 https://github.com/atlassian/react-beautiful-dnd
 https://dev.to/bryntum/best-drag-and-drop-libraries-for-frontend-developers-39d5
+https://github.com/atlassian/react-beautiful-dnd/blob/master/docs/api/drag-drop-context.md
+https://www.youtube.com/watch?v=YJ5EMzyimfc&ab_channel=LaithAcademy (18:04)
 
 Troubleshoot Help:
 https://stackoverflow.com/questions/46004859/winerror-5access-denied-pytesseract
@@ -33,11 +35,6 @@ https://stackoverflow.com/questions/40136070/ipython-cv2-imwrite-not-saving-imag
 To Look at:
 https://cloud.google.com/vision
 https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
-
-GCLOUD Documentation
-https://cloud.google.com/docs/authentication/provide-credentials-adc#how-to
-https://cloud.google.com/sdk/docs/install
-https://cloud.google.com/vision/docs/ocr?cloudshell=true
 
 EDEN AI:
 https://app.edenai.run/bricks/ocr/ocr-receipt

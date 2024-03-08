@@ -15,12 +15,14 @@ import {
 import ImageUploader from '../components/ImageUploader';
 import AddNewItem from '../components/AddNewItem';
 import AddNames from '../components/AddNames';
+import AssignItems from '../components/AssignItems';
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
     const [names, setNames] = useState([]);
     const [isAddItem, setIsAddItem] = useState(false);
     const [isAddNames, setIsAddNames] = useState(false);
+    const [isAssignItems, setIsAssignItems] = useState(false);
 
     function onClickAddItem() {
         setIsAddItem(true);
@@ -32,6 +34,10 @@ function MainPage() {
 
     function onClickProceedToNames() {
         setIsAddNames(true);
+    }
+
+    function onClickProceedToAssign() {
+        setIsAssignItems(true);
     }
 
     function addToNames(name) {
@@ -69,103 +75,113 @@ function MainPage() {
 
     return (
         <Grid container spacing={1}>
-            {!isAddNames ? (
-                receiptData.length === 0 ? (
-                    <>
+            {!isAssignItems ? (
+                    !isAddNames ? (
+                        receiptData.length === 0 ? (
+                            <>
+                                <Grid item xs={12}>
+                                    No receipt has been uploaded yet.
+                                </Grid>
+                                <Grid item xs={12}>
+                                    {/* <ImageUploader /> */}
+                                    <Button
+                                        component="label"
+                                        role={undefined}
+                                        variant="contained"
+                                        tabIndex={-1}
+                                        onClick={dummyOnClick}
+                                        >
+                                        Dummy Upload
+                                    </Button>
+                                </Grid>
+                            </>
+                        ) : (
+                            <>
+                                <Grid item xs={12}>
+                                    <Table sx={{ border: '1px solid black' }}>
+                                        <TableHead>
+                                            <TableRow sx={{ backgroundColor: 'gray' }}>
+                                                <TableCell>Item</TableCell>
+                                                <TableCell>Quantity</TableCell>
+                                                <TableCell>Cost (Item x Quantity)</TableCell>
+                                            </TableRow>
+                                        </TableHead>
+                                        <TableBody>
+                                            {receiptData.map((receiptRow) => (
+                                                <TableRow key={receiptRow.id}>
+                                                    <TableCell>{receiptRow.description}</TableCell>
+                                                    <TableCell>{receiptRow.quantity}</TableCell>
+                                                    <TableCell>{receiptRow.amount_line}</TableCell>
+                                                </TableRow>
+                                            ))}
+                                        </TableBody>
+                                    </Table>
+                                </Grid>
+                                <Grid item xs={6}>
+                                    Is this all of the items on the receipt? If not, you can manually add by clicking the orange button.
+                                </Grid>
+                                <Grid item xs={6}>
+                                    <ButtonGroup variant="contained">
+                                        {!!isAddItem ? (
+                                            <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickDontAddItem}>
+                                                Stop Adding Items
+                                            </Button>
+                                        ) : (
+                                            <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickAddItem}>
+                                                Add New Items
+                                            </Button>
+                                        )}
+                                        <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={onClickProceedToNames}>
+                                            Proceed
+                                        </Button>
+                                    </ButtonGroup>
+                                </Grid>
+                                {!!isAddItem && (
+                                    <AddNewItem submitNewItem={addToReceiptData} />
+                                )}
+                                <Grid item xs={12}>
+                                    {/* <ImageUploader /> */}
+                                    <Button
+                                        component="label"
+                                        role={undefined}
+                                        variant="contained"
+                                        tabIndex={-1}
+                                        onClick={dummyOnClick}
+                                        >
+                                        Dummy Re-Upload
+                                    </Button>
+                                </Grid>
+                            </>
+                        )
+                    ) : (
+                        <>
                         <Grid item xs={12}>
-                            No receipt has been uploaded yet.
+                            <h1>Great! Now enter the names of the payees, including yourself!</h1>
                         </Grid>
-                        <Grid item xs={12}>
-                            {/* <ImageUploader /> */}
-                            <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                onClick={dummyOnClick}
-                                >
-                                Dummy Upload
-                            </Button>
-                        </Grid>
-                    </>
+                            {names.map((name) => (
+                                <Grid item xs={12}>
+                                    <Box sx={{ p: 2, border: '1px dashed grey' }}>
+                                        <Typography>{name}</Typography>
+                                    </Box>
+                                </Grid>
+                            ))}
+                            <AddNames namesList={names} addToNames={addToNames} />
+                            <Grid xs={12}>
+                                <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={onClickProceedToAssign}>
+                                    Assign Items
+                                </Button>
+                            </Grid>
+                        </>
+                    )
                 ) : (
                     <>
-                        <Grid item xs={12}>
-                            <Table sx={{ border: '1px solid black' }}>
-                                <TableHead>
-                                    <TableRow sx={{ backgroundColor: 'gray' }}>
-                                        <TableCell>Item</TableCell>
-                                        <TableCell>Quantity</TableCell>
-                                        <TableCell>Cost (Item x Quantity)</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {receiptData.map((receiptRow) => (
-                                        <TableRow key={receiptRow.id}>
-                                            <TableCell>{receiptRow.description}</TableCell>
-                                            <TableCell>{receiptRow.quantity}</TableCell>
-                                            <TableCell>{receiptRow.amount_line}</TableCell>
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
+                        <Grid xs={12}>
+                            <h1 sx={{ textAlign: 'center' }}>Assign Items</h1>
                         </Grid>
-                        <Grid item xs={6}>
-                            Is this all of the items on the receipt? If not, you can manually add by clicking the orange button.
-                        </Grid>
-                        <Grid item xs={6}>
-                            <ButtonGroup variant="contained">
-                                {!!isAddItem ? (
-                                    <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickDontAddItem}>
-                                        Stop Adding Items
-                                    </Button>
-                                ) : (
-                                    <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickAddItem}>
-                                        Add New Items
-                                    </Button>
-                                )}
-                                <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={onClickProceedToNames}>
-                                    Proceed
-                                </Button>
-                            </ButtonGroup>
-                        </Grid>
-                        {!!isAddItem && (
-                            <AddNewItem submitNewItem={addToReceiptData} />
-                        )}
-                        <Grid item xs={12}>
-                            {/* <ImageUploader /> */}
-                            <Button
-                                component="label"
-                                role={undefined}
-                                variant="contained"
-                                tabIndex={-1}
-                                onClick={dummyOnClick}
-                                >
-                                Dummy Re-Upload
-                            </Button>
-                        </Grid>
+                        <AssignItems />
                     </>
                 )
-            ) : (
-                <>
-                <Grid item xs={12}>
-                    <h1>Great! Now enter the names of the payees, including yourself!</h1>
-                </Grid>
-                    {names.map((name) => (
-                        <Grid item xs={12}>
-                            <Box sx={{ p: 2, border: '1px dashed grey' }}>
-                                <Typography>{name}</Typography>
-                            </Box>
-                        </Grid>
-                    ))}
-                    <AddNames namesList={names} addToNames={addToNames} />
-                    <Grid xs={12}>
-                        <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={'TBA'}>
-                            Assign Items
-                        </Button>
-                    </Grid>
-                </>
-            )}
+            }
         </Grid>
     )
 }
