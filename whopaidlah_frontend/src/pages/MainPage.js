@@ -8,13 +8,17 @@ import {
     TableCell,
     TableBody,
     TableRow,
+    Box,
+    Typography,
 } from "@mui/material";
 
 import ImageUploader from '../components/ImageUploader';
 import AddNewItem from '../components/AddNewItem';
+import AddNames from '../components/AddNames';
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
+    const [names, setNames] = useState([]);
     const [isAddItem, setIsAddItem] = useState(false);
     const [isAddNames, setIsAddNames] = useState(false);
 
@@ -24,6 +28,14 @@ function MainPage() {
 
     function onClickDontAddItem() {
         setIsAddItem(false);
+    }
+
+    function onClickProceedToNames() {
+        setIsAddNames(true);
+    }
+
+    function addToNames(name) {
+        setNames(names => [...names, name]);
     }
 
     function addToReceiptData(itemName, quantity, cost) {
@@ -50,16 +62,36 @@ function MainPage() {
         }
     },[receiptData])
 
+    useEffect(() => {
+        console.log("Refreshing Names");
+        console.log(names)
+    },[names])
+
     return (
         <Grid container spacing={1}>
-            {receiptData.length === 0 ? (
-                <Grid item xs={12}>
-                    No receipt has been uploaded yet.
-                </Grid>
+            {!isAddNames ? (
+                receiptData.length === 0 ? (
+                    <>
+                        <Grid item xs={12}>
+                            No receipt has been uploaded yet.
+                        </Grid>
+                        <Grid item xs={12}>
+                            {/* <ImageUploader /> */}
+                            <Button
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                onClick={dummyOnClick}
+                                >
+                                Dummy Upload
+                            </Button>
+                        </Grid>
+                    </>
                 ) : (
                     <>
                         <Grid item xs={12}>
-                            <Table sx={{border: '1px solid black'}}>
+                            <Table sx={{ border: '1px solid black' }}>
                                 <TableHead>
                                     <TableRow sx={{ backgroundColor: 'gray' }}>
                                         <TableCell>Item</TableCell>
@@ -69,8 +101,8 @@ function MainPage() {
                                 </TableHead>
                                 <TableBody>
                                     {receiptData.map((receiptRow) => (
-                                        <TableRow>
-                                            <TableCell >{receiptRow.description}</TableCell>
+                                        <TableRow key={receiptRow.id}>
+                                            <TableCell>{receiptRow.description}</TableCell>
                                             <TableCell>{receiptRow.quantity}</TableCell>
                                             <TableCell>{receiptRow.amount_line}</TableCell>
                                         </TableRow>
@@ -84,40 +116,56 @@ function MainPage() {
                         <Grid item xs={6}>
                             <ButtonGroup variant="contained">
                                 {!!isAddItem ? (
-                                    <Button variant="contained" size="medium" sx={{backgroundColor: 'orange', p: 1}} onClick={onClickDontAddItem}>
+                                    <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickDontAddItem}>
                                         Stop Adding Items
                                     </Button>
-                                ): (
-                                    <Button variant="contained" size="medium" sx={{backgroundColor: 'orange', p: 1}} onClick={onClickAddItem}>
+                                ) : (
+                                    <Button variant="contained" size="medium" sx={{ backgroundColor: 'orange', p: 1 }} onClick={onClickAddItem}>
                                         Add New Items
                                     </Button>
                                 )}
-                                <Button variant="contained" size="medium" sx={{p: 3}} color='success'>
+                                <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={onClickProceedToNames}>
                                     Proceed
                                 </Button>
                             </ButtonGroup>
                         </Grid>
-                        {!!isAddItem ? (
+                        {!!isAddItem && (
                             <AddNewItem submitNewItem={addToReceiptData} />
-                        ) : (
-                            <>
-                            </>
                         )}
+                        <Grid item xs={12}>
+                            {/* <ImageUploader /> */}
+                            <Button
+                                component="label"
+                                role={undefined}
+                                variant="contained"
+                                tabIndex={-1}
+                                onClick={dummyOnClick}
+                                >
+                                Dummy Re-Upload
+                            </Button>
+                        </Grid>
                     </>
-                    )
-            }
-            <Grid item xs={12}>
-                {/* <ImageUploader /> */}
-                <Button
-                    component="label"
-                    role={undefined}
-                    variant="contained"
-                    tabIndex={-1}
-                    onClick={dummyOnClick}
-                    >
-                    Dummy Upload
-                </Button>
-            </Grid>
+                )
+            ) : (
+                <>
+                <Grid item xs={12}>
+                    <h1>Great! Now enter the names of the payees, including yourself!</h1>
+                </Grid>
+                    {names.map((name) => (
+                        <Grid item xs={12}>
+                            <Box sx={{ p: 2, border: '1px dashed grey' }}>
+                                <Typography>{name}</Typography>
+                            </Box>
+                        </Grid>
+                    ))}
+                    <AddNames namesList={names} addToNames={addToNames} />
+                    <Grid xs={12}>
+                        <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={'TBA'}>
+                            Assign Items
+                        </Button>
+                    </Grid>
+                </>
+            )}
         </Grid>
     )
 }

@@ -14,7 +14,7 @@ function AddNewItem( { submitNewItem }) {
     const [isLoading, setIsLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 
-    const { handleSubmit, control, formState: { isSubmitting } } = useForm({
+    const { handleSubmit, control } = useForm({
         defaultValues: { item_name: "", quantity: "", cost: "" },
 	});
 
