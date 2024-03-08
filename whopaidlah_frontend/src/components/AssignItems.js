@@ -23,13 +23,17 @@ function AssignItems() {
                 console.log("drag drop event occurred");
             }}
         >
-            <Droppable droppableId="itemList">
+            <Droppable droppableId="itemList" type="group">
                 {(provided) => (
                     <div className="itemList" {...provided.droppableProps} ref={provided.innerRef}>
-                        {items.map((item) => (
-                            <div key={item.name}>
-                                {item.name} ({item.quantity}, ${item.price})
-                            </div>
+                        {items.map((item, index) => (
+                            <Draggable draggableId={item.name} key={item.name} index={index}>
+                                {(provided) => (
+                                    <div key={item.name} {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
+                                        {item.name} ({item.quantity}, ${item.price})
+                                    </div>
+                                )}
+                            </Draggable>
                         ))}
                     </div>
                 )}
