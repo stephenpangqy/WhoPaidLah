@@ -166,7 +166,7 @@ function MainPage() {
                                 </Grid>
                             ))}
                             <AddNames namesList={names} addToNames={addToNames} />
-                            <Grid xs={12}>
+                            <Grid item xs={12}>
                                 <Button variant="contained" size="medium" sx={{ p: 3 }} color='success' onClick={onClickProceedToAssign}>
                                     Assign Items
                                 </Button>

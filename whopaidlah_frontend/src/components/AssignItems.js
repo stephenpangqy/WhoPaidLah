@@ -17,11 +17,13 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 function AssignItems() {
     const [items, setItems] = useState([{name: 'item1', quantity: '1', price: '2.80'}, {name: 'item2', quantity: '2', price: '$9.50'}, {name: 'item3', quantity: '1', price: '5.80'}]);
 
+    const handleDragAndDrop = (results) => {
+        console.log("handleDragDrop called")
+    };
+
     return (
         <DragDropContext 
-            onDragEnd={() => {
-                console.log("drag drop event occurred");
-            }}
+            onDragEnd={handleDragAndDrop}
         >
             <Droppable droppableId="itemList" type="group">
                 {(provided) => (
@@ -35,6 +37,7 @@ function AssignItems() {
                                 )}
                             </Draggable>
                         ))}
+                        {provided.placeholder}
                     </div>
                 )}
             </Droppable>
