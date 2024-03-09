@@ -16,6 +16,7 @@ import ImageUploader from '../components/ImageUploader';
 import AddNewItem from '../components/AddNewItem';
 import AddNames from '../components/AddNames';
 import AssignItems from '../components/AssignItems';
+import AssignItemsTest from '../components/AssignItemsTest';
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
@@ -175,10 +176,10 @@ function MainPage() {
                     )
                 ) : (
                     <>
-                        <Grid xs={12}>
+                        <Grid item xs={12}>
                             <h1 sx={{ textAlign: 'center' }}>Assign Items</h1>
                         </Grid>
-                        <AssignItems />
+                        <AssignItemsTest />
                     </>
                 )
             }
