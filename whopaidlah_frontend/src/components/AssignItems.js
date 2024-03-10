@@ -15,7 +15,13 @@ import { LoadingButton } from "@mui/lab";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 function AssignItems() {
-    const [items, setItems] = useState([{name: 'item1', quantity: '1', price: '2.80', assignees: []}, {name: 'item2', quantity: '2', price: '$9.50', assignees: []}, {name: 'item3', quantity: '1', price: '5.80', assignees: []}]);
+    const [items, setItems] = useState(
+        [
+            {name: 'item1', quantity: '1', price: '2.80', assignees: []}, 
+            {name: 'item2', quantity: '2', price: '$9.50', assignees: []}, 
+            {name: 'item3', quantity: '1', price: '5.80', assignees: []}
+        ]
+    );
     const [names, setNames] = useState(['Sarah', 'Lina'])
 
     const handleDragAndDrop = (results) => {
@@ -89,7 +95,7 @@ function AssignItems() {
                                         {(provided) => (
                                             <div key={item.name} {...provided.dragHandleProps} {...provided.draggableProps} ref={provided.innerRef}>
                                                 {/* {item.name} ({item.quantity}, ${item.price}) */}
-                                                <ItemAssignList {...item}  />
+                                                <ItemAssignList itemName={item.name} />
                                             </div>
                                         )}
                                     </Draggable>
@@ -102,7 +108,7 @@ function AssignItems() {
             </DragDropContext>
     );
 
-    function ItemAssignList({itemName, names, id}) {
+    function ItemAssignList(itemName, names, id) {
         return (
             <Droppable droppableId={id}>
                 {(provided) => (

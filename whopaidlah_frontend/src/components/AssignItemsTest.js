@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import '../App.css';
 
 const DATA = [
     {
     id: "1",
-    name: "Chicken Wings",
+    name: "Assigning",
     items: [
-        { id: "26fd50b3-3841-496e-8b32-73636f6f4197", name: "3% Milk" },
-        { id: "b0ee9d50-d0a6-46f8-96e3-7f3f0f9a2525", name: "Butter" },
+        { id: "1", name: "Stephen" },
+        { id: "2", name: "LT" },
     ],
     tint: 1,
     },
@@ -15,7 +16,8 @@ const DATA = [
     id: "2",
     name: "Braised Fish",
     items: [
-
+        { id: "1", name: "Stephen" },
+        { id: "2", name: "LT" },
     ],
     tint: 2,
     },
@@ -23,7 +25,8 @@ const DATA = [
     id: "3",
     name: "Chicken Wings",
     items: [
-
+        { id: "1", name: "Stephen" },
+        { id: "2", name: "LT" },
     ],
     tint: 3,
     },

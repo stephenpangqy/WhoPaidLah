@@ -28,6 +28,18 @@
   color: #61dafb;
 }
 
+.items-container {
+  background-color: blue;
+}
+
+.names-container {
+  background-color: darkgreen;
+}
+
+.name-container {
+  background-color: lightgreen;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
