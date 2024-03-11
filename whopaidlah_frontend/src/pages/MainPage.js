@@ -179,7 +179,7 @@ function MainPage() {
                         <Grid item xs={12}>
                             <h1 sx={{ textAlign: 'center' }}>Assign Items</h1>
                         </Grid>
-                        <AssignItems />
+                        <AssignItemsTest />
                     </>
                 )
             }

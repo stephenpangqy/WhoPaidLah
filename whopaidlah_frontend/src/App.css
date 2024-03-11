@@ -28,16 +28,13 @@
   color: #61dafb;
 }
 
-.items-container {
+.store-container {
   background-color: blue;
 }
 
-.names-container {
-  background-color: darkgreen;
-}
-
-.name-container {
-  background-color: lightgreen;
+.food-container {
+  background-color: red;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import {
+    Grid
+} from "@mui/material";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import '../App.css';
 
@@ -6,156 +9,113 @@ const DATA = [
     {
     id: "1",
     name: "Assigning",
-    items: [
-        { id: "1", name: "Stephen" },
-        { id: "2", name: "LT" },
-    ],
     tint: 1,
     },
     {
     id: "2",
     name: "Braised Fish",
-    items: [
-        { id: "1", name: "Stephen" },
-        { id: "2", name: "LT" },
-    ],
     tint: 2,
     },
     {
     id: "3",
     name: "Chicken Wings",
-    items: [
-        { id: "1", name: "Stephen" },
-        { id: "2", name: "LT" },
-    ],
     tint: 3,
     },
     ];
 
+// Function to create Droppable
+function DroppableItem(props) {
+    const [assignees, setAssignees] = useState([]);
+
+    useEffect(() => {
+        setAssignees(props.item.assignees);
+    },[])
+
+    return (
+        <Grid item xs={8}>
+            <Droppable droppableId={props.item.id} type="group">
+                {(provided) => (
+                    <div className="food-container" {...provided.droppableProps} ref={provided.innerRef}>
+                        {props.item.id}
+                        {assignees.map((assignee, index) => (
+                            <Draggable draggableId={assignee} key={assignee} index={index}>
+                                {(provided) => (
+                                    <div className="store-container" {...provided.dragHandleProps}  {...provided.draggableProps} ref={provided.innerRef} >
+                                        <h3>{assignee}</h3>
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
+            </Droppable>
+        </Grid>
+    )
+}
+
 function AssignItemsTest() {
     const [stores, setStores] = useState(DATA);
+    const [stores2, setStores2] = useState([]);
 
-    const handleDragAndDrop = (results) => {
-        const { source, destination, type } = results;
+    const [places, setPlaces] = useState([
+        {id:'Assign...', assignees: ['Sarah','Lina']},
+        {id:'droppable1', assignees: []},
+        {id:'droppable2', assignees: []}
+    ]); // Represent list of droppables
 
-        if (!destination) return;
 
+    const onDragEnd = (results) => {
+        console.log("drag drop event occurrd");
+        console.log(results);
+
+        const {source, destination, type} = results;
+
+        if (!destination) return; // (Do nothing) if Draggable was not dragged anywhere
         if (
-        source.droppableId === destination.droppableId &&
-        source.index === destination.index
-        )
-        return;
+            source.droppableId === destination.droppableId &&
+            source.index === destination.index
+        ) return; // (Do nothing) if Draggable was dragged to same position
 
-        if (type === "group") {
-        const reorderedStores = [...stores];
+        let chosenAssignees;
+        // If draggable is within same droppable, assignees are stated accordingly
 
-        const storeSourceIndex = source.index;
-        const storeDestinatonIndex = destination.index;
-
-        const [removedStore] = reorderedStores.splice(storeSourceIndex, 1);
-        reorderedStores.splice(storeDestinatonIndex, 0, removedStore);
-
-        return setStores(reorderedStores);
+        if (source.droppableId === destination.droppableId) {
+            chosenAssignees = places[source.droppableId]
+            // Process for same droppable index change (TO DO)
         }
-        const itemSourceIndex = source.index;
-        const itemDestinationIndex = destination.index;
 
-        const storeSourceIndex = stores.findIndex(
-        (store) => store.id === source.droppableId
-        );
-        const storeDestinationIndex = stores.findIndex(
-        (store) => store.id === destination.droppableId
-        );
+        // If draggable moved to different droppable, assignees should change for both droppables (TODO)
 
-        const newSourceItems = [...stores[storeSourceIndex].items];
-        const newDestinationItems =
-        source.droppableId !== destination.droppableId
-            ? [...stores[storeDestinationIndex].items]
-            : newSourceItems;
+        // Re-orders elements based on where it was dragged
 
-        const [deletedItem] = newSourceItems.splice(itemSourceIndex, 1);
-        newDestinationItems.splice(itemDestinationIndex, 0, deletedItem);
+        const reorderedStores = [...stores];
+        const sourceIndex = source.index;
+        const destinationIndex = destination.index;
 
-        const newStores = [...stores];
-
-        newStores[storeSourceIndex] = {
-        ...stores[storeSourceIndex],
-        items: newSourceItems,
-        };
-        newStores[storeDestinationIndex] = {
-        ...stores[storeDestinationIndex],
-        items: newDestinationItems,
-        };
-
-        setStores(newStores);
-    };
+        const [removedStore] = reorderedStores.splice(sourceIndex, 1); // Gets the dragged store
+        reorderedStores.splice(destinationIndex, 0, removedStore); // Adds the dragged store to the correct order
+        
+        console.log(reorderedStores);
+        return setStores(reorderedStores);
+        
+    }
 
     return (
         <div className="layout__wrapper">
-        <div className="card">
-            <DragDropContext onDragEnd={handleDragAndDrop}>
-            <div className="header">
-                <h1>Shopping List</h1>
-            </div>
-            <Droppable droppableId="ROOT" type="group">
-                {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {stores.map((store, index) => (
-                    <Draggable
-                        draggableId={store.id}
-                        index={index}
-                        key={store.id}
-                    >
-                        {(provided) => (
-                        <div
-                            {...provided.dragHandleProps}
-                            {...provided.draggableProps}
-                            ref={provided.innerRef}
-                        >
-                            <StoreList {...store} />
-                        </div>
-                        )}
-                    </Draggable>
-                    ))}
-                    {provided.placeholder}
-                </div>
-                )}
-            </Droppable>
-            </DragDropContext>
-        </div>
-        </div>
-    );
-    }
-
-    function StoreList({ name, items, id }) {
-    return (
-        <Droppable droppableId={id}>
-        {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-            <div className="items-container">
-                <h3>{name}</h3>
-            </div>
-            <div className="names-container">
-                {items.map((item, index) => (
-                <Draggable draggableId={item.id} index={index} key={item.id}>
-                    {(provided) => (
-                    <div
-                        className="name-container"
-                        {...provided.dragHandleProps}
-                        {...provided.draggableProps}
-                        ref={provided.innerRef}
-                    >
-                        <h4>{item.name}</h4>
+            <div className="card">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <div className="header">
+                        <h1>Assign the Payees</h1>
                     </div>
-                    )}
-                </Draggable>
-                ))}
-                {provided.placeholder}
+                    {places.map((place) => (
+                        <DroppableItem item={place} />
+                    ))}
+                </DragDropContext>
             </div>
-            </div>
-        )}
-        </Droppable>
+        </div>
     );
-    }
+}
+
 
 export default AssignItemsTest;
