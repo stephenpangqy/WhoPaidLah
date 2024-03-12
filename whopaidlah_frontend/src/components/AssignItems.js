@@ -1,120 +1,134 @@
 import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
 import {
-    Button,
-    Box,
-    Stack,
-    Typography,
-    TextField,
-    Grid,
-
-
+    Grid
 } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import '../App.css';
 
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import '../App.css'
+// Function to create Droppable
+function DroppableItem(props) {
+    let assignees = props.item.assignees;
 
-const initialItems = [
-    { id: 'item1', content: 'Item 1' },
-    { id: 'item2', content: 'Item 2' },
-];
-
-function AssignItems() {
-    const [items, setItems] = useState(initialItems);
-    const [droppedItems, setDroppedItems] = useState([]);
-
-    const onDragEnd = (result) => {
-            if (!result.destination) return;
-            console.log(result);
-            const draggedItem = items.find((item) => item.id === result.draggableId); // item Object that shifted destination
-            console.log(draggedItem);
-            const newItems = items.filter((item) => item.id !== result.draggableId); // List of remaining items in source list
-            console.log(newItems);
-            setItems(newItems);
-
-            setDroppedItems([...droppedItems, draggedItem]);
-        };
+    useEffect(() => {
+        // setAssignees(props.item.assignees);
+    },[props.item])
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <Droppable droppableId="droppable-1">
-            {(provided) => (
-                <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={{
-                    background: 'lightgrey',
-                    padding: 10,
-                    width: 200,
-                    minHeight: 200,
-                }}
-                >
-                {items.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided) => (
-                        <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                            userSelect: 'none',
-                            padding: 10,
-                            margin: '0 0 10px 0',
-                            background: 'white',
-                            ...provided.draggableProps.style,
-                        }}
-                        >
-                        {item.content}
-                        </div>
-                    )}
-                    </Draggable>
-                ))}
-                {provided.placeholder}
-                </div>
-            )}
+        <Grid item xs={8}>
+            <Droppable droppableId={props.item.id} type="group">
+                {(provided) => (
+                    <div className="food-container" {...provided.droppableProps} ref={provided.innerRef}>
+                        {props.item.id}
+                        {assignees.map((assignee, index) => (
+                            <Draggable draggableId={assignee} key={assignee} index={index}>
+                                {(provided) => (
+                                    <div className="store-container" {...provided.dragHandleProps}  {...provided.draggableProps} ref={provided.innerRef} >
+                                        <h3>{assignee}</h3>
+                                    </div>
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                    </div>
+                )}
             </Droppable>
+        </Grid>
+    )
+}
 
-            <Droppable droppableId="droppable-2">
-            {(provided) => (
-                <div
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-                style={{
-                    background: 'lightgrey',
-                    padding: 10,
-                    width: 200,
-                    minHeight: 200,
-                }}
-                >
-                {droppedItems.map((item, index) => (
-                    <Draggable key={item.id} draggableId={item.id} index={index}>
-                    {(provided) => (
-                        <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                            userSelect: 'none',
-                            padding: 10,
-                            margin: '0 0 10px 0',
-                            background: 'white',
-                            ...provided.draggableProps.style,
-                        }}
-                        >
-                        {item.content}
-                        </div>
-                    )}
-                    </Draggable>
-                ))}
-                {provided.placeholder}
-                </div>
-            )}
-            </Droppable>
+// Main Function
+function AssignItems() {
+
+    const [places, setPlaces] = useState([
+        {id:'Assign...', assignees: ['Sarah','Lina', 'Cheryl']},
+        {id:'droppable1', assignees: []},
+        {id:'droppable2', assignees: []}
+    ]); // Represent list of droppables
+
+    const onDragEnd = (results) => {
+        console.log("drag drop event occurrd");
+        console.log(results);
+
+        const {source, destination, type} = results;
+
+        if (!destination) return; // (Do nothing) if Draggable was not dragged anywhere
+        if (
+            source.droppableId === destination.droppableId &&
+            source.index === destination.index
+        ) return; // (Do nothing) if Draggable was dragged to same position
+
+        let chosenAssignees;
+        let chosenAssigneesTwo;
+        // If draggable is within same droppable, assignees are stated accordingly
+
+        if (source.droppableId === destination.droppableId) {
+            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+             // Re-orders elements based on where it was dragged
+            const reorderedAssignees = [...chosenAssignees];
+            const sourceIndex = source.index;
+            const destinationIndex = destination.index;
+
+            const [removedAssignee] = reorderedAssignees.splice(sourceIndex, 1); // Gets the dragged store
+            reorderedAssignees.splice(destinationIndex, 0, removedAssignee); // Adds the dragged store to the correct order     
+            
+            const setNewAssignees = () => {
+                setPlaces(places => 
+                    places.map((item) =>
+                        item.id === source.droppableId ? { ...item, assignees: reorderedAssignees } : item
+                    )
+                );
+            }
+            setNewAssignees();
+        }
+
+        // If draggable moved to different droppable, assignees should change for both droppables (TODO)
+        else if (source.droppableId !== destination.droppableId) {
+
+            // Remove the assignee from source
+            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+            const reorderedSource = [...chosenAssignees];
+            const sourceIndex = source.index;
+            const [removedAssignee] = reorderedSource.splice(sourceIndex, 1);
+
+            // Add assignee to the destination
+            chosenAssigneesTwo = places.find(item => item.id === destination.droppableId).assignees;
+            const reorderedDestination = [...chosenAssigneesTwo];
+            const destinationIndex = destination.index;
+            reorderedDestination.splice(destinationIndex, 0, removedAssignee);
+
+            const setNewAssignees = () => {
+                setPlaces(places =>
+                    places.map((item) => {
+                        if (item.id === source.droppableId) {
+                            return { ...item, assignees: reorderedSource}
+                        } else if (item.id === destination.droppableId) {
+                            return { ...item, assignees: reorderedDestination}
+                        }
+                        else {
+                            return item;
+                        }
+                    })
+                )
+            }
+            setNewAssignees();
+        }
+    }
+
+    return (
+        <div className="layout__wrapper">
+            <div className="card">
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <div className="header">
+                        <h1>Assign the Payees</h1>
+                    </div>
+                    {places.map((place) => (
+                        <DroppableItem item={place} />
+                    ))}
+                </DragDropContext>
+            </div>
         </div>
-        </DragDropContext>
     );
 }
+
 
 export default AssignItems;
