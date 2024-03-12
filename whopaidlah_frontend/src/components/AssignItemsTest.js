@@ -82,7 +82,7 @@ function AssignItemsTest() {
 
         if (source.droppableId === destination.droppableId) {
             chosenAssignees = places[source.droppableId]
-            // Process for same droppable index change (TO DO)
+            // Process for same droppable index change (TO DO )
         }
 
         // If draggable moved to different droppable, assignees should change for both droppables (TODO)
