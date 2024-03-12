@@ -5,31 +5,13 @@ import {
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import '../App.css';
 
-const DATA = [
-    {
-    id: "1",
-    name: "Assigning",
-    tint: 1,
-    },
-    {
-    id: "2",
-    name: "Braised Fish",
-    tint: 2,
-    },
-    {
-    id: "3",
-    name: "Chicken Wings",
-    tint: 3,
-    },
-    ];
-
 // Function to create Droppable
 function DroppableItem(props) {
-    const [assignees, setAssignees] = useState([]);
+    let assignees = props.item.assignees;
 
     useEffect(() => {
-        setAssignees(props.item.assignees);
-    },[])
+        // setAssignees(props.item.assignees);
+    },[props.item])
 
     return (
         <Grid item xs={8}>
@@ -55,15 +37,12 @@ function DroppableItem(props) {
 }
 
 function AssignItemsTest() {
-    const [stores, setStores] = useState(DATA);
-    const [stores2, setStores2] = useState([]);
 
     const [places, setPlaces] = useState([
-        {id:'Assign...', assignees: ['Sarah','Lina']},
+        {id:'Assign...', assignees: ['Sarah','Lina', 'Cheryl']},
         {id:'droppable1', assignees: []},
         {id:'droppable2', assignees: []}
     ]); // Represent list of droppables
-
 
     const onDragEnd = (results) => {
         console.log("drag drop event occurrd");
@@ -78,27 +57,48 @@ function AssignItemsTest() {
         ) return; // (Do nothing) if Draggable was dragged to same position
 
         let chosenAssignees;
+        let chosenAssigneesTwo;
         // If draggable is within same droppable, assignees are stated accordingly
 
         if (source.droppableId === destination.droppableId) {
-            chosenAssignees = places[source.droppableId]
-            // Process for same droppable index change (TO DO )
+            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+             // Re-orders elements based on where it was dragged
+            const reorderedAssignees = [...chosenAssignees];
+            const sourceIndex = source.index;
+            const destinationIndex = destination.index;
+
+            const [removedAssignee] = reorderedAssignees.splice(sourceIndex, 1); // Gets the dragged store
+            reorderedAssignees.splice(destinationIndex, 0, removedAssignee); // Adds the dragged store to the correct order     
+            
+            const setNewAssignees = () => {
+                setPlaces(places => 
+                    places.map((item) =>
+                        item.id === source.droppableId ? { ...item, assignees: reorderedAssignees } : item
+                    )
+                );
+            }
+            setNewAssignees();
         }
 
         // If draggable moved to different droppable, assignees should change for both droppables (TODO)
+        else if (source.droppableId !== destination.droppableId) {
 
-        // Re-orders elements based on where it was dragged
+            // Remove the assignee from source
+            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+            const reorderedSource = [...chosenAssignees];
+            const sourceIndex = source.index;
+            const [removedAssignee] = reorderedSource.splice(sourceIndex, 1);
 
-        const reorderedStores = [...stores];
-        const sourceIndex = source.index;
-        const destinationIndex = destination.index;
+            // Add assignee to the destination
+            chosenAssigneesTwo.places.find(item => item.id === destination.droppableId).assignees;
+            const reorderedDestination = [...chosenAssigneesTwo];
+            const destinationIndex = destination.index;
+            reorderedDestination.splice(destinationIndex, 0, removedAssignee);
 
-        const [removedStore] = reorderedStores.splice(sourceIndex, 1); // Gets the dragged store
-        reorderedStores.splice(destinationIndex, 0, removedStore); // Adds the dragged store to the correct order
-        
-        console.log(reorderedStores);
-        return setStores(reorderedStores);
-        
+            const setNewAssignees = () => {
+                // TO ADD WHEN IM BACK
+            }
+        }
     }
 
     return (
