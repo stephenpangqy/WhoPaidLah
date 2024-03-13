@@ -37,13 +37,27 @@ function DroppableItem(props) {
 }
 
 // Main Function
-function AssignItems() {
+function AssignItems(props) {
 
-    const [places, setPlaces] = useState([
+    const [itemDict, setItemDict] = useState([
         {id:'Assign...', assignees: ['Sarah','Lina', 'Cheryl']},
         {id:'droppable1', assignees: []},
         {id:'droppable2', assignees: []}
     ]); // Represent list of droppables
+
+    useEffect(() => {
+        const names = props.names;
+        const receiptData = props.receiptData;
+        console.log(names);
+        console.log(receiptData);
+        let itemDictionary = [{id: 'Assign...', assignees: names}]
+        for (let row of receiptData) {
+            let idString = row.description + ' (' + row.quantity + ') $' + row.amount_line;
+            itemDictionary.push({id: idString, assignees: []})
+        }
+
+        setItemDict(itemDictionary);
+    },[])
 
     const onDragEnd = (results) => {
         console.log("drag drop event occurrd");
@@ -62,17 +76,17 @@ function AssignItems() {
         // If draggable is within same droppable, assignees are stated accordingly
 
         if (source.droppableId === destination.droppableId) {
-            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+            chosenAssignees = itemDict.find(item => item.id === source.droppableId).assignees;
              // Re-orders elements based on where it was dragged
             const reorderedAssignees = [...chosenAssignees];
             const sourceIndex = source.index;
             const destinationIndex = destination.index;
 
             const [removedAssignee] = reorderedAssignees.splice(sourceIndex, 1); // Gets the dragged store
-            reorderedAssignees.splice(destinationIndex, 0, removedAssignee); // Adds the dragged store to the correct order     
+            reorderedAssignees.splice(destinationIndex, 0, removedAssignee); // Adds the dragged store to the correct order  
             
             const setNewAssignees = () => {
-                setPlaces(places => 
+                setItemDict(places => 
                     places.map((item) =>
                         item.id === source.droppableId ? { ...item, assignees: reorderedAssignees } : item
                     )
@@ -81,23 +95,25 @@ function AssignItems() {
             setNewAssignees();
         }
 
-        // If draggable moved to different droppable, assignees should change for both droppables (TODO)
+        // If draggable moved to different droppable, assignees should change for both droppables
         else if (source.droppableId !== destination.droppableId) {
 
             // Remove the assignee from source
-            chosenAssignees = places.find(item => item.id === source.droppableId).assignees;
+            chosenAssignees = itemDict.find(item => item.id === source.droppableId).assignees;
             const reorderedSource = [...chosenAssignees];
             const sourceIndex = source.index;
             const [removedAssignee] = reorderedSource.splice(sourceIndex, 1);
+            // If source is from "Assign...", it should generate a new draggable with the same name (TODO)
+            // TO DO!!!
 
             // Add assignee to the destination
-            chosenAssigneesTwo = places.find(item => item.id === destination.droppableId).assignees;
+            chosenAssigneesTwo = itemDict.find(item => item.id === destination.droppableId).assignees;
             const reorderedDestination = [...chosenAssigneesTwo];
             const destinationIndex = destination.index;
             reorderedDestination.splice(destinationIndex, 0, removedAssignee);
 
             const setNewAssignees = () => {
-                setPlaces(places =>
+                setItemDict(places =>
                     places.map((item) => {
                         if (item.id === source.droppableId) {
                             return { ...item, assignees: reorderedSource}
@@ -121,7 +137,7 @@ function AssignItems() {
                     <div className="header">
                         <h1>Assign the Payees</h1>
                     </div>
-                    {places.map((place) => (
+                    {itemDict.map((place) => (
                         <DroppableItem item={place} />
                     ))}
                 </DragDropContext>

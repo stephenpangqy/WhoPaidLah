@@ -56,21 +56,18 @@ function MainPage() {
 
     function dummyOnClick() {
         // Dummy function to simulate uploading of data
-        setReceiptData([{'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Double', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Double', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 9.0, 'description': 'Fifty/Fifty(S)', 'quantity': 2.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 6.3, 'description': 'Cheese Fries', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}])
+        setReceiptData([{'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Triple', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Double', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 9.0, 'description': 'Fifty/Fifty(S)', 'quantity': 2.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 6.3, 'description': 'Cheese Fries', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}])
     }
 
     useEffect(() => {
-        console.log("Refreshing Receipt Data")
         // Populate ReceiptData
-        console.log(receiptData)
         if (receiptData.length > 0) {
             console.log(receiptData[0].description)
         }
     },[receiptData])
 
     useEffect(() => {
-        console.log("Refreshing Names");
-        console.log(names)
+
     },[names])
 
     return (
@@ -178,7 +175,7 @@ function MainPage() {
                         <Grid item xs={12}>
                             <h1 sx={{ textAlign: 'center' }}>Assign Items</h1>
                         </Grid>
-                        <AssignItems />
+                        <AssignItems receiptData={receiptData} names={names} />
                     </>
                 )
             }

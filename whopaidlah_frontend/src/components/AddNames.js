@@ -25,7 +25,6 @@ function AddNames({ addToNames }) {
         setIsDisabled(true);
 
         addToNames(name);
-        console.log(name);
 
         setIsLoading(false);
         setIsDisabled(false);
