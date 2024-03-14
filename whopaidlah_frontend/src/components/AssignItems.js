@@ -14,16 +14,16 @@ function DroppableItem(props) {
     },[props.item])
 
     return (
-        <Grid item xs={8}>
+        <Grid item xs={6}>
             <Droppable droppableId={props.item.id} type="group">
                 {(provided) => (
                     <div className="food-container" {...provided.droppableProps} ref={provided.innerRef}>
                         {props.item.id}
                         {assignees.map((assignee, index) => (
-                            <Draggable draggableId={assignee} key={assignee} index={index}>
+                            <Draggable draggableId={assignee.id} key={assignee.id} index={index}>
                                 {(provided) => (
                                     <div className="store-container" {...provided.dragHandleProps}  {...provided.draggableProps} ref={provided.innerRef} >
-                                        <h3>{assignee}</h3>
+                                        <h3>{assignee.content}</h3>
                                     </div>
                                 )}
                             </Draggable>
@@ -40,16 +40,17 @@ function DroppableItem(props) {
 function AssignItems(props) {
 
     const [itemDict, setItemDict] = useState([
-        {id:'Assign...', assignees: ['Sarah','Lina', 'Cheryl']},
+        {id:'Assign...', assignees: [{id: 'Sarah-0', content: 'Sarah'},{id: 'Lina-0', content: 'Lina'}, { id: 'Cheryl-0', content: 'Cheryl'}]},
         {id:'droppable1', assignees: []},
         {id:'droppable2', assignees: []}
     ]); // Represent list of droppables
 
     useEffect(() => {
-        const names = props.names;
+        const names = [];
+        for (let name of props.names) {
+            names.push({id: name + "-0", content: name})
+        }
         const receiptData = props.receiptData;
-        console.log(names);
-        console.log(receiptData);
         let itemDictionary = [{id: 'Assign...', assignees: names}]
         for (let row of receiptData) {
             let idString = row.description + ' (' + row.quantity + ') $' + row.amount_line;
@@ -60,7 +61,6 @@ function AssignItems(props) {
     },[])
 
     const onDragEnd = (results) => {
-        console.log("drag drop event occurrd");
         console.log(results);
 
         const {source, destination, type} = results;
@@ -103,8 +103,15 @@ function AssignItems(props) {
             const reorderedSource = [...chosenAssignees];
             const sourceIndex = source.index;
             const [removedAssignee] = reorderedSource.splice(sourceIndex, 1);
-            // If source is from "Assign...", it should generate a new draggable with the same name (TODO)
-            // TO DO!!!
+            // If source is from "Assign...", it should generate a new draggable with the same name 
+            if (source.droppableId === "Assign...") {
+                let clonedAssignee = {...removedAssignee};
+                let name = clonedAssignee.id.split("-")[0];
+                let count = parseInt(clonedAssignee.id.split("-")[1]);
+                let newCount = count + 1;
+                clonedAssignee.id = name + "-" + newCount;
+                reorderedSource.splice(sourceIndex, 0, clonedAssignee)
+            }
 
             // Add assignee to the destination
             chosenAssigneesTwo = itemDict.find(item => item.id === destination.droppableId).assignees;
@@ -125,6 +132,7 @@ function AssignItems(props) {
                         }
                     })
                 )
+                console.log(itemDict);
             }
             setNewAssignees();
         }
@@ -134,12 +142,11 @@ function AssignItems(props) {
         <div className="layout__wrapper">
             <div className="card">
                 <DragDropContext onDragEnd={onDragEnd}>
-                    <div className="header">
-                        <h1>Assign the Payees</h1>
-                    </div>
-                    {itemDict.map((place) => (
-                        <DroppableItem item={place} />
-                    ))}
+                    <Grid container spacing={2}>
+                        {itemDict.map((place) => (
+                            <DroppableItem item={place} />
+                        ))}
+                    </Grid>
                 </DragDropContext>
             </div>
         </div>

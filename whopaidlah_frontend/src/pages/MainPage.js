@@ -173,7 +173,7 @@ function MainPage() {
                 ) : (
                     <>
                         <Grid item xs={12}>
-                            <h1 sx={{ textAlign: 'center' }}>Assign Items</h1>
+                            <h1 sx={{ textAlign: 'center' }}>Assign Payees</h1>
                         </Grid>
                         <AssignItems receiptData={receiptData} names={names} />
                     </>
