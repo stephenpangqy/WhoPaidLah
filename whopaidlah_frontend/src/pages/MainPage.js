@@ -19,6 +19,7 @@ import AssignItems from '../components/AssignItems';
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
+    const [taxData, setTaxData] = useState({});
     const [names, setNames] = useState([]);
     const [isAddItem, setIsAddItem] = useState(false);
     const [isAddNames, setIsAddNames] = useState(false);
@@ -57,6 +58,8 @@ function MainPage() {
     function dummyOnClick() {
         // Dummy function to simulate uploading of data
         setReceiptData([{'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Triple', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Double', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 9.0, 'description': 'Fifty/Fifty(S)', 'quantity': 2.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 6.3, 'description': 'Cheese Fries', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}])
+        
+        setTaxData({'total_tax': 1.87, 'service_charge': 1.89}) // These are the only 2 taxes to account for, if needed.
     }
 
     useEffect(() => {
