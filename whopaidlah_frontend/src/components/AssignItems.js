@@ -37,7 +37,7 @@ function DroppableItem(props) {
 }
 
 // Main Function
-function AssignItems(props) {
+function AssignItems(props, { updateAssigneeReceiptData }) {
 
     const [itemDict, setItemDict] = useState([
         {id:'Assign...', assignees: [{id: 'Sarah-0', content: 'Sarah'},{id: 'Lina-0', content: 'Lina'}, { id: 'Cheryl-0', content: 'Cheryl'}]},
@@ -59,6 +59,11 @@ function AssignItems(props) {
 
         setItemDict(itemDictionary);
     },[])
+
+    useEffect(() => {
+        console.log("itemDict updated");
+        props.updateAssigneeReceiptData(itemDict);
+    },[itemDict])
 
     const onDragEnd = (results) => {
         console.log(results);
@@ -132,7 +137,6 @@ function AssignItems(props) {
                         }
                     })
                 )
-                console.log(itemDict);
             }
             setNewAssignees();
         }
