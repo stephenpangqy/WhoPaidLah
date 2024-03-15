@@ -35,11 +35,16 @@ function AssignTax(props) {
         }
         setTaxData(initialTaxData)
         // TO CONTINUE
+        console.log(initialTaxData)
+        if (Object.keys(initialTaxData).length > 0) {
+            // There is Tax in the Receipt
+            setIsGotTax(true);
+        }
     },[])
 
     return (
         <Grid item xs={12}>
-            {!isGotTax ? (
+            {!!isGotTax ? (
                     !isPercentTax ? (
                         <>
                             <h1>Do you choose to do % on Items Tax??</h1>
