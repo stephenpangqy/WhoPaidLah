@@ -22,7 +22,7 @@ function AssignTax(props) {
     const [taxData, setTaxData] = useState({});
     const [isGotTax, setIsGotTax] = useState(false); // True if taxData got charge, False if taxData empty
     const [isPercentTax, setIsPercentTax] = useState(false); // 1st Scenario - 1st Prompt (Yes)
-    const [isSecondPrompt, setIsSecondPrompt] = useState(false); // 1st Scenario - 1st Prompt (No)
+    const [isAddingPercent, setIsAddingPercent] = useState(false); // 1st Scenario - 1st Prompt (No)
     const [isNotSharingTax, setIsNotSharingTax] = useState(false); // 1st Scenario - 2nd prompt (No)
     const [isEnterTax, setIsEnterTax] = useState(false); // 2nd Scenario - User Prompt there is no tax (No)
 
@@ -42,25 +42,35 @@ function AssignTax(props) {
         }
     },[])
 
+    function onClickChoosePercentTax() {
+        setIsAddingPercent(true);
+    }
+
     return (
         <Grid item xs={12}>
             {!!isGotTax ? (
                     !isPercentTax ? (
-                        <>
-                            <h1>Do you choose to do % on Items Tax??</h1>
-                            <Button
-                                variant="contained"
-                                onClick={'TBA'}
-                            >
-                                Pay Tax by Rate (%) based on Items
-                            </Button>
-                            <Button
-                                variant="contained"
-                                onClick={'TBA'}
-                            >
-                                Pay Tax by Tax Amount
-                            </Button>
-                        </>
+                        !isAddingPercent ? (
+                            <>
+                                <h1>Do you choose to do % or tax amount on Items Tax??</h1>
+                                <Button
+                                    variant="contained"
+                                    onClick={onClickChoosePercentTax}
+                                >
+                                    Pay Tax by Rate (%) based on Items
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    onClick={'TBA'}
+                                >
+                                    Pay Tax by Tax Amount
+                                </Button>
+                            </>
+                        ) : (
+                            <>
+                                <h1>Enter Total Tax Rate to be paid (e.g. GST 9% + Svc Charge 10% = 19%)</h1>
+                            </>
+                        )
                     ) : (
                         !isNotSharingTax ? (
                             <>
