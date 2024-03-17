@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 import {
     Grid,
-    Button
+    Button,
+    Stack,
+    Typography,
+    TextField,
 } from "@mui/material";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import '../App.css';
@@ -21,10 +25,13 @@ function AssignTax(props) {
 
     const [taxData, setTaxData] = useState({});
     const [isGotTax, setIsGotTax] = useState(false); // True if taxData got charge, False if taxData empty
-    const [isPercentTax, setIsPercentTax] = useState(false); // 1st Scenario - 1st Prompt (Yes)
+    const [isNotPercentTax, setIsNotPercentTax] = useState(false); // 1st Scenario - 1st Prompt (Yes)
     const [isAddingPercent, setIsAddingPercent] = useState(false); // 1st Scenario - 1st Prompt (No)
     const [isNotSharingTax, setIsNotSharingTax] = useState(false); // 1st Scenario - 2nd prompt (No)
     const [isEnterTax, setIsEnterTax] = useState(false); // 2nd Scenario - User Prompt there is no tax (No)
+
+    const [names, setNames] = useState([]);
+    const [chosenNames, setChosenNames] = useState([]);
 
     useEffect(() => {   
         let initialTaxData = {};
@@ -34,7 +41,6 @@ function AssignTax(props) {
             }
         }
         setTaxData(initialTaxData)
-        // TO CONTINUE
         console.log(initialTaxData)
         if (Object.keys(initialTaxData).length > 0) {
             // There is Tax in the Receipt
@@ -46,10 +52,27 @@ function AssignTax(props) {
         setIsAddingPercent(true);
     }
 
+
+    const { handleSubmit, control } = useForm({
+        defaultValues: { taxPercent: "" },
+	});
+
+    const onSubmitTaxPercent = ({ taxPercent }) => {
+        // Start Calculation
+    }
+    
+    function onClickChooseNotPercentTax() {
+        setIsNotPercentTax(true);
+    }
+
+    function onClickNotSharingTax() {
+        setIsNotSharingTax(true);
+    }
+
     return (
         <Grid item xs={12}>
             {!!isGotTax ? (
-                    !isPercentTax ? (
+                    !isNotPercentTax ? (
                         !isAddingPercent ? (
                             <>
                                 <h1>Do you choose to do % or tax amount on Items Tax??</h1>
@@ -61,7 +84,7 @@ function AssignTax(props) {
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    onClick={'TBA'}
+                                    onClick={onClickChooseNotPercentTax}
                                 >
                                     Pay Tax by Tax Amount
                                 </Button>
@@ -69,27 +92,64 @@ function AssignTax(props) {
                         ) : (
                             <>
                                 <h1>Enter Total Tax Rate to be paid (e.g. GST 9% + Svc Charge 10% = 19%)</h1>
+                                <form onSubmit={handleSubmit(onSubmitTaxPercent)}>
+                                    <Stack spacing={2}>
+                                        <Typography fontWeight={"500"}>
+                                            Enter Total Tax Percent
+                                        </Typography>
+                                        <Controller
+                                            name={"taxPercent"}
+                                            control={control}
+                                            render={({
+                                                field: { onChange, value },
+                                                fieldState: { error },
+                                            }) => (
+                                                <TextField
+                                                    type="number"
+                                                    onChange={onChange}
+                                                    value={value}
+                                                    label={"Total Tax Percent (%)"}
+                                                    error={!!error}
+                                                    helperText={error ? error.message : null}
+                                                />
+                                            )}
+                                            rules={{
+                                                required: "Tax Rate cannot be empty",
+                                            }}
+                                        />
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            // ADD CALCULATION OnClick HERE
+                                        >
+                                            Start Calculation
+                                        </Button>
+                                    </Stack>
+                                </form>
                             </>
                         )
                     ) : (
                         !isNotSharingTax ? (
                             <>
-                                <h1>Are you splitting the tax amount equally? Or is someone giving a treat :P?</h1>
+                                <h1>Okay, Are you splitting the tax amount equally? Or is someone giving a treat :P?</h1>
                                 <Button
                                     variant="contained"
                                     onClick={'TBA'}
+                                    // ADD CALCULATION OnClick HERE
                                 >
                                     Yes, Split Tax Amount with Everyone
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    onClick={'TBA'}
+                                    onClick={onClickNotSharingTax}
                                 >
                                     No, Some are Treating Tax!
                                 </Button>
                             </>
                         ) : (
                             <h1>Checkbox and select who are paying for tax to split among them</h1>
+                            // TODO CHECKBOXES
                         )
                         
                     )
