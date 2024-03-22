@@ -10,6 +10,8 @@ import {
     TableRow,
     Box,
     Typography,
+    Snackbar,
+    Alert
 } from "@mui/material";
 
 import ImageUploader from '../components/ImageUploader';
@@ -29,6 +31,9 @@ function MainPage() {
 
     const [assigneeReceiptData, setAssigneeReceiptData] = useState([]);
 
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+
     function onClickAddItem() {
         setIsAddItem(true);
     }
@@ -42,7 +47,13 @@ function MainPage() {
     }
 
     function onClickProceedToAssign() {
+        if (names.length <= 1) {
+            setOpenSnackbar(true);
+            setErrorMsg("You have to enter AT LEAST 2 people to split the bill!")
+            return;
+        }
         setIsAssignItems(true);
+        setOpenSnackbar(false);
     }
 
     function addToNames(name) {
@@ -64,8 +75,22 @@ function MainPage() {
     }
 
     function onClickProceedToTax() {
-        console.log(assigneeReceiptData);
+        // Verifying that all items have at least one payee, if not stop the process.
+        for (let receiptObject of assigneeReceiptData) {
+            console.log(receiptObject);
+            if (receiptObject.assignees.length <= 0) {
+                setOpenSnackbar(true);
+                setErrorMsg('Please ensure that every item has at least one person assigned to pay for it!')
+                return;
+            }
+        }
         setIsAssignTax(true);
+        setOpenSnackbar(false);
+    }
+
+    function handleCloseSnackbar() {
+        setOpenSnackbar(false);
+        setErrorMsg('');
     }
 
     function dummyOnClick() {
@@ -207,7 +232,18 @@ function MainPage() {
                         </>
                 )
             }
+            <Snackbar
+                open={openSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar}
+                    severity="error"
+                    variant="filled"
+                >
+                    {errorMsg}
+                </Alert>
+            </Snackbar>
         </Grid>
+
     )
 }
 

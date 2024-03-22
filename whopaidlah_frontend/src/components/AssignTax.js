@@ -150,6 +150,7 @@ function AssignTax(props) {
                         ) : (
                             <h1>Checkbox and select who are paying for tax to split among them</h1>
                             // TODO CHECKBOXES
+                            
                         )
                         
                     )
