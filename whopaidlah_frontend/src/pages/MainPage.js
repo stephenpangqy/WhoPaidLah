@@ -33,6 +33,8 @@ function MainPage() {
 
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
+    const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
+    const [infoMsg, setInfoMsg] = useState('');
 
     function onClickAddItem() {
         setIsAddItem(true);
@@ -62,12 +64,35 @@ function MainPage() {
 
     function addToReceiptData(itemName, quantity, cost) {
         // Add more fields here if deemed necessary
-        let dataRow = {
-            'description': itemName,
-            'quantity': quantity,
-            'amount_line': cost
+        let originalReceiptData = [...receiptData];
+        console.log(originalReceiptData);
+        let alreadyExistingObject = originalReceiptData.find(obj => obj.description === itemName)
+        if (alreadyExistingObject !== undefined) {
+            alreadyExistingObject.quantity += quantity;
+            alreadyExistingObject.amount_line += cost;
+            console.log(alreadyExistingObject);
+            // needs fixing
+            setReceiptData(receiptData =>
+                receiptData.map((receiptObj) => {
+                        console.log(receiptObj);
+                        console.log(alreadyExistingObject);
+                        if (receiptObj.description === alreadyExistingObject.description) {
+                            return alreadyExistingObject;
+                        }
+                    }
+                )
+            )
+            setOpenSnackbarInfo(true);
+            setInfoMsg('As this item already exists in the table, we have updated the quantity and cost accordingly.')
         }
-        setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
+        else {
+            let dataRow = {
+                'description': itemName,
+                'quantity': quantity,
+                'amount_line': cost
+            }
+            setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
+        }
     }
 
     function updateAssigneeReceiptData(itemDict) {
@@ -91,6 +116,11 @@ function MainPage() {
     function handleCloseSnackbar() {
         setOpenSnackbar(false);
         setErrorMsg('');
+    }
+
+    function handleCloseSnackbarInfo() {
+        setOpenSnackbarInfo(false);
+        setInfoMsg('');
     }
 
     function dummyOnClick() {
@@ -240,6 +270,16 @@ function MainPage() {
                     variant="filled"
                 >
                     {errorMsg}
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={openSnackbarInfo}
+            >
+                <Alert onClose={handleCloseSnackbarInfo}
+                    severity="info"
+                    variant="filled"
+                >
+                    {infoMsg}
                 </Alert>
             </Snackbar>
         </Grid>
