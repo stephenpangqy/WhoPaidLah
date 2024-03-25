@@ -203,7 +203,7 @@ function MainPage() {
                             <Grid item xs={12}>
                                 <h1 sx={{ textAlign: 'center' }}>Assign Taxes</h1>
                             </Grid>
-                            <AssignTax taxData={taxData} />
+                            <AssignTax names={names} taxData={taxData} />
                         </>
                 )
             }

@@ -6,6 +6,9 @@ import {
     Stack,
     Typography,
     TextField,
+    FormControlLabel,
+    FormGroup,
+    Checkbox,
 } from "@mui/material";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import '../App.css';
@@ -46,19 +49,43 @@ function AssignTax(props) {
             // There is Tax in the Receipt
             setIsGotTax(true);
         }
+        setNames(props.names);
+
+        // Remove below line when not testing for no taxData
+        setIsGotTax(false);
     },[])
 
     function onClickChoosePercentTax() {
         setIsAddingPercent(true);
     }
 
-
-    const { handleSubmit, control } = useForm({
+    const formPercentTax = useForm({
         defaultValues: { taxPercent: "" },
 	});
 
+    const formChosenNames = useForm({
+        defaultValues: {},
+    })
+
     const onSubmitTaxPercent = ({ taxPercent }) => {
         // Start Calculation
+        console.log(taxPercent);
+    }
+
+    const handleCheckboxChange = (name) => (event) => {
+        const { checked } = event.target;
+        console.log(name);
+        console.log(event.target);
+        console.log(checked);
+        formChosenNames.setValue(name, checked);
+        console.log(formChosenNames);
+    };
+
+    const onSubmitChosenNames = (event) => {
+        // Start Calculation
+        // For some reason, chosenNames not used
+        console.log(event);
+
     }
     
     function onClickChooseNotPercentTax() {
@@ -68,6 +95,7 @@ function AssignTax(props) {
     function onClickNotSharingTax() {
         setIsNotSharingTax(true);
     }
+    
 
     return (
         <Grid item xs={12}>
@@ -92,14 +120,14 @@ function AssignTax(props) {
                         ) : (
                             <>
                                 <h1>Enter Total Tax Rate to be paid (e.g. GST 9% + Svc Charge 10% = 19%)</h1>
-                                <form onSubmit={handleSubmit(onSubmitTaxPercent)}>
+                                <form onSubmit={formPercentTax.handleSubmit(onSubmitTaxPercent)}>
                                     <Stack spacing={2}>
                                         <Typography fontWeight={"500"}>
                                             Enter Total Tax Percent
                                         </Typography>
                                         <Controller
                                             name={"taxPercent"}
-                                            control={control}
+                                            control={formPercentTax.control}
                                             render={({
                                                 field: { onChange, value },
                                                 fieldState: { error },
@@ -148,26 +176,66 @@ function AssignTax(props) {
                                 </Button>
                             </>
                         ) : (
-                            <h1>Checkbox and select who are paying for tax to split among them</h1>
-                            // TODO CHECKBOXES
+                            <>
+                                <h1>Checkbox and select who are paying for tax to split among them</h1>
+                                <form onSubmit={formChosenNames.handleSubmit(onSubmitChosenNames)}>
+                                    <Stack spacing={2}>
+                                        <Typography fontWeight={"500"}>
+                                            Choose those who are paying for tax.
+                                        </Typography>
+                                        <FormGroup>
+                                            {names.map((name) => (
+                                                 <Controller
+                                                    name={name}
+                                                    control={formChosenNames.control}
+                                                    render={({
+                                                        field: { props },
+                                                    }) => (
+                                                        <FormControlLabel
+                                                            key={name}
+                                                            control={
+                                                                <Checkbox
+                                                                    {...props}
+                                                                    checked={formChosenNames.getValues()[name] || false}
+                                                                    onChange={handleCheckboxChange(name)}
+                                                                />
+                                                            }
+                                                            label={name}
+                                                        />
+                                                    )}
+                                                />
+                                            ))}
+                                        </FormGroup>
+                                        <Button
+                                            type="submit"
+                                            variant="contained"
+                                            color="primary"
+                                            // ADD CALCULATION
+                                        >
+                                            Start Calculation
+                                        </Button>
+                                    </Stack>
+                                </form>
+                            </>
                         )
                         
                     )
                 ) : (
                     !isEnterTax ? (
                         <>
-                            <h1>Is there confirmed no tax? Press button to Confirm, or proceed to Calculation</h1>
+                            <h1>Is there confirmed no tax? Press button to Confirm and proceed with Calculation, or allow user to enter tax</h1>
                             <Button
                                 variant="contained"
                                 onClick={'TBA'}
+                                // Replace OnClcik with Proceed to Calculation
                             >
-                                Yes, Split Tax Amount with Everyone
+                                Yes, there is no tax.
                             </Button>
                             <Button
                                 variant="contained"
                                 onClick={'TBA'}
                             >
-                                No, Some are Treating Tax!
+                                No, there is tax missing
                             </Button>
                         </>
                     ) : (
