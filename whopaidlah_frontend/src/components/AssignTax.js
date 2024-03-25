@@ -10,7 +10,6 @@ import {
     FormGroup,
     Checkbox,
 } from "@mui/material";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import '../App.css';
 
 function AssignTax(props) {
@@ -94,6 +93,10 @@ function AssignTax(props) {
 
     function onClickNotSharingTax() {
         setIsNotSharingTax(true);
+    }
+
+    function onClickAddNewTax() {
+        setIsEnterTax(true);
     }
     
 
@@ -233,13 +236,16 @@ function AssignTax(props) {
                             </Button>
                             <Button
                                 variant="contained"
-                                onClick={'TBA'}
+                                onClick={onClickAddNewTax}
                             >
                                 No, there is tax missing
                             </Button>
                         </>
                     ) : (
-                        <h1>Add Tax Manually now </h1>
+                        <>
+                            <h1>Add Tax Manually now </h1>
+
+                        </>
                     )
                 )
 
