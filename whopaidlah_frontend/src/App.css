@@ -29,11 +29,11 @@
 }
 
 .store-container {
-  background-color: blue;
+  background-color: gray;
 }
 
 .food-container {
-  background-color: red;
+  background-color: darkorange;
   padding: 10px;
 }
 

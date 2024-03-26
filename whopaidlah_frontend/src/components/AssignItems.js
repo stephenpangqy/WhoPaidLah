@@ -37,7 +37,7 @@ function DroppableItem(props) {
 }
 
 // Main Function
-function AssignItems(props, { updateAssigneeReceiptData }) {
+function AssignItems(props) {
 
     const [itemDict, setItemDict] = useState([
         {id:'Assign...', assignees: [{id: 'Sarah-0', content: 'Sarah'},{id: 'Lina-0', content: 'Lina'}, { id: 'Cheryl-0', content: 'Cheryl'}]},

@@ -73,7 +73,6 @@ function AddNewItem( { submitNewItem }) {
                         rules={{ 
                             required: "Quantity required",
                             pattern: {
-                                value: /^[1-9]$/i,
                                 message: "You should only be entering an integer above 0",
                             },
                         }}

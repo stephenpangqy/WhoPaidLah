@@ -10,6 +10,8 @@ import {
     TableRow,
     Box,
     Typography,
+    Snackbar,
+    Alert
 } from "@mui/material";
 
 import ImageUploader from '../components/ImageUploader';
@@ -29,6 +31,11 @@ function MainPage() {
 
     const [assigneeReceiptData, setAssigneeReceiptData] = useState([]);
 
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [errorMsg, setErrorMsg] = useState('');
+    const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
+    const [infoMsg, setInfoMsg] = useState('');
+
     function onClickAddItem() {
         setIsAddItem(true);
     }
@@ -42,7 +49,13 @@ function MainPage() {
     }
 
     function onClickProceedToAssign() {
+        if (names.length <= 1) {
+            setOpenSnackbar(true);
+            setErrorMsg("You have to enter AT LEAST 2 people to split the bill!")
+            return;
+        }
         setIsAssignItems(true);
+        setOpenSnackbar(false);
     }
 
     function addToNames(name) {
@@ -51,12 +64,35 @@ function MainPage() {
 
     function addToReceiptData(itemName, quantity, cost) {
         // Add more fields here if deemed necessary
-        let dataRow = {
-            'description': itemName,
-            'quantity': quantity,
-            'amount_line': cost
+        let originalReceiptData = [...receiptData];
+        console.log(originalReceiptData);
+        let alreadyExistingObject = originalReceiptData.find(obj => obj.description === itemName)
+        if (alreadyExistingObject !== undefined) {
+            alreadyExistingObject.quantity += quantity;
+            alreadyExistingObject.amount_line += cost;
+            console.log(alreadyExistingObject);
+            // needs fixing
+            setReceiptData(receiptData =>
+                receiptData.map((receiptObj) => {
+                        console.log(receiptObj);
+                        console.log(alreadyExistingObject);
+                        if (receiptObj.description === alreadyExistingObject.description) {
+                            return alreadyExistingObject;
+                        }
+                    }
+                )
+            )
+            setOpenSnackbarInfo(true);
+            setInfoMsg('As this item already exists in the table, we have updated the quantity and cost accordingly.')
         }
-        setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
+        else {
+            let dataRow = {
+                'description': itemName,
+                'quantity': quantity,
+                'amount_line': cost
+            }
+            setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
+        }
     }
 
     function updateAssigneeReceiptData(itemDict) {
@@ -64,8 +100,27 @@ function MainPage() {
     }
 
     function onClickProceedToTax() {
-        console.log(assigneeReceiptData);
+        // Verifying that all items have at least one payee, if not stop the process.
+        for (let receiptObject of assigneeReceiptData) {
+            console.log(receiptObject);
+            if (receiptObject.assignees.length <= 0) {
+                setOpenSnackbar(true);
+                setErrorMsg('Please ensure that every item has at least one person assigned to pay for it!')
+                return;
+            }
+        }
         setIsAssignTax(true);
+        setOpenSnackbar(false);
+    }
+
+    function handleCloseSnackbar() {
+        setOpenSnackbar(false);
+        setErrorMsg('');
+    }
+
+    function handleCloseSnackbarInfo() {
+        setOpenSnackbarInfo(false);
+        setInfoMsg('');
     }
 
     function dummyOnClick() {
@@ -207,7 +262,28 @@ function MainPage() {
                         </>
                 )
             }
+            <Snackbar
+                open={openSnackbar}
+            >
+                <Alert onClose={handleCloseSnackbar}
+                    severity="error"
+                    variant="filled"
+                >
+                    {errorMsg}
+                </Alert>
+            </Snackbar>
+            <Snackbar
+                open={openSnackbarInfo}
+            >
+                <Alert onClose={handleCloseSnackbarInfo}
+                    severity="info"
+                    variant="filled"
+                >
+                    {infoMsg}
+                </Alert>
+            </Snackbar>
         </Grid>
+
     )
 }
 
