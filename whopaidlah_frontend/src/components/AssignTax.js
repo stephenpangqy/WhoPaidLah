@@ -9,6 +9,11 @@ import {
     FormControlLabel,
     FormGroup,
     Checkbox,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody
 } from "@mui/material";
 import '../App.css';
 import EnterTax from "./EnterTax";
@@ -52,7 +57,7 @@ function AssignTax(props) {
         setNames(props.names);
 
         // Remove below line when not testing for no taxData
-        setIsGotTax(false);
+        // setIsGotTax(false);
     },[])
 
     function onClickChoosePercentTax() {
@@ -99,6 +104,21 @@ function AssignTax(props) {
     function onClickAddNewTax() {
         setIsEnterTax(true);
     }
+
+    // Helper Functions
+    // Converts Input String (e.g. total_tax) to this format (e.g. Total Tax)
+    function convertToTitleCase(inputString) {
+        // Split the input string by underscore
+        let words = inputString.split('_');
+      
+        // Capitalize the first letter of each word
+        let capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
+      
+        // Join the words back together with a space
+        let titleCaseString = capitalizedWords.join(' ');
+      
+        return titleCaseString;
+    }
     
 
     return (
@@ -107,6 +127,23 @@ function AssignTax(props) {
                     !isNotPercentTax ? (
                         !isAddingPercent ? (
                             <>
+                                <h1>Here are the following taxes that have been detected:</h1>
+                                <Table sx={{ border: '1px solid black' }}>
+                                    <TableHead>
+                                        <TableRow sx={{ backgroundcolor: 'gray', textWeight: 'bold'}}>
+                                            <TableCell>Tax Name</TableCell>
+                                            <TableCell>Amount</TableCell>
+                                        </TableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {Object.entries(taxData).map(([key, value]) => (
+                                            <TableRow key={key}>
+                                                <TableCell>{convertToTitleCase(key)}</TableCell>
+                                                <TableCell>{value}</TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
                                 <h1>Do you choose to do % or tax amount on Items Tax??</h1>
                                 <Button
                                     variant="contained"
