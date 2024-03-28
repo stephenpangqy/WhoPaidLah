@@ -11,6 +11,7 @@ import {
     Checkbox,
 } from "@mui/material";
 import '../App.css';
+import EnterTax from "./EnterTax";
 
 function AssignTax(props) {
     // 1st Scenario --> If there are tax Data from Receipt, populate accordingly
@@ -244,6 +245,7 @@ function AssignTax(props) {
                     ) : (
                         <>
                             <h1>Add Tax Manually now </h1>
+                            <EnterTax />
 
                         </>
                     )
