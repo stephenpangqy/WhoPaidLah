@@ -72,9 +72,14 @@ function AssignTax(props) {
         defaultValues: {},
     })
 
+    // Submits the new Tax Percentage entered by the user
     const onSubmitTaxPercent = ({ taxPercent }) => {
         // Start Calculation
         console.log(taxPercent);
+        let taxPercentFloat = parseFloat(taxPercent) / 100
+        let newTaxData = { 'taxPercent': taxPercentFloat }
+        props.updateTaxData(newTaxData)
+        startCalculation('percent');
     }
 
     const handleCheckboxChange = (name) => (event) => {
@@ -103,6 +108,17 @@ function AssignTax(props) {
 
     function onClickAddNewTax() {
         setIsEnterTax(true);
+    }
+
+    // Calls the startCalculation function on MainPage.js
+    function startCalculation(type) {
+        // Possible values for type:
+        // percent --> if tax is based on % (e.g. 10% Service, 9% GST)\
+        // amount --> if tax is based on amount stated on receipt)
+        console.log("Calling StartCalculation(AssignTax)")
+        console.log("Updating Tax Data")
+        
+        props.startCalculation(type);
     }
 
     // Helper Functions
@@ -190,7 +206,7 @@ function AssignTax(props) {
                                             type="submit"
                                             variant="contained"
                                             color="primary"
-                                            // ADD CALCULATION OnClick HERE
+                                            // onClick={() => startCalculation('percent')}
                                         >
                                             Start Calculation
                                         </Button>
@@ -204,8 +220,7 @@ function AssignTax(props) {
                                 <h1>Okay, Are you splitting the tax amount equally? Or is someone giving a treat :P?</h1>
                                 <Button
                                     variant="contained"
-                                    onClick={'TBA'}
-                                    // ADD CALCULATION OnClick HERE
+                                    onClick={() => startCalculation('amount')}
                                 >
                                     Yes, Split Tax Amount with Everyone
                                 </Button>
@@ -251,7 +266,7 @@ function AssignTax(props) {
                                             type="submit"
                                             variant="contained"
                                             color="primary"
-                                            // ADD CALCULATION
+                                            onClick={() => startCalculation('amount')}
                                         >
                                             Start Calculation
                                         </Button>
@@ -267,8 +282,7 @@ function AssignTax(props) {
                             <h1>Is there confirmed no tax? Press button to Confirm and proceed with Calculation, or allow user to enter tax</h1>
                             <Button
                                 variant="contained"
-                                onClick={'TBA'}
-                                // Replace OnClcik with Proceed to Calculation
+                                onClick={() => startCalculation('amount')}
                             >
                                 Yes, there is no tax.
                             </Button>

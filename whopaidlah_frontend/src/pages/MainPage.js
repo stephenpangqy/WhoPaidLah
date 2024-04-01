@@ -19,6 +19,7 @@ import AddNewItem from '../components/AddNewItem';
 import AddNames from '../components/AddNames';
 import AssignItems from '../components/AssignItems';
 import AssignTax from "../components/AssignTax";
+import CalculatePayments from "../components/CalculatePayments";
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
@@ -35,6 +36,9 @@ function MainPage() {
     const [errorMsg, setErrorMsg] = useState('');
     const [openSnackbarInfo, setOpenSnackbarInfo] = useState(false);
     const [infoMsg, setInfoMsg] = useState('');
+
+    const [isCalculation, setIsCalculation] = useState(false);
+    const [taxType, setTaxType] = useState('');
 
     function onClickAddItem() {
         setIsAddItem(true);
@@ -113,6 +117,18 @@ function MainPage() {
         setOpenSnackbar(false);
     }
 
+    function updateTaxData(newTaxData) {
+        setTaxData(newTaxData);
+    }
+
+    function startCalculation(type) {
+        console.log(type);
+        setIsCalculation(true);
+        console.log("CALCULATING INDIVIDUAL PAYMENTS");
+        console.log(taxData);
+        setTaxType(type);
+    }
+
     function handleCloseSnackbar() {
         setOpenSnackbar(false);
         setErrorMsg('');
@@ -143,7 +159,8 @@ function MainPage() {
 
     return (
         <Grid container spacing={1}>
-            {!isAssignTax ? (
+            {!isCalculation ? (
+                !isAssignTax ? (
                     !isAssignItems ? (
                             !isAddNames ? (
                                 receiptData.length === 0 ? (
@@ -258,8 +275,11 @@ function MainPage() {
                             <Grid item xs={12}>
                                 <h1 sx={{ textAlign: 'center' }}>Assign Taxes</h1>
                             </Grid>
-                            <AssignTax names={names} taxData={taxData} />
+                            <AssignTax names={names} taxData={taxData} startCalculation={startCalculation} updateTaxData={updateTaxData} />
                         </>
+                    )
+                ) : (
+                    <CalculatePayments taxType={taxType} taxData={taxData} names={names} assigneeReceiptData={assigneeReceiptData} />
                 )
             }
             <Snackbar
