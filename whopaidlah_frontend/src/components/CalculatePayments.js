@@ -38,6 +38,7 @@ function CalculatePayments(props) {
 
         if (taxType === 'percent') {
             console.log("Calculating based on percentage")
+            processPaymentListPercent(taxData.taxPercent, names, assigneeReceiptData);
         }
         else if (taxType === 'amount') {
             console.log("Calculating based on amount")
@@ -46,6 +47,8 @@ function CalculatePayments(props) {
 
     function processPaymentListPercent(taxPercentDecimal, names, assigneeReceiptData) {
         for (let name of names) {
+            let costAmount = 0;
+            let stringCost = "";
             for (let i = 1; i < assigneeReceiptData.length; i++) {
                 // Skip index 0, since that is "Assignee" block
                 let paidForItem = false;
@@ -54,7 +57,24 @@ function CalculatePayments(props) {
                         paidForItem = true;
                     }
                 }
+                if (paidForItem) {
+                    let itemCost = parseFloat(assigneeReceiptData[i].id.split("$")[1]) / assigneeReceiptData[i].assignees.length;
+                    console.log(itemCost);
+
+                    costAmount += itemCost;
+                    if (stringCost !== "") {
+                        stringCost += " + "
+                    }
+                    stringCost += assigneeReceiptData[i].id.split("$")[0] + "[" + itemCost + "]";
+                }
             }
+            // Add Percentage Tax
+            costAmount = costAmount + costAmount * taxPercentDecimal;
+            stringCost += "\n = " + costAmount;
+
+            // Check results
+            console.log(stringCost);
+            console.log(costAmount);
         }
     }
 
