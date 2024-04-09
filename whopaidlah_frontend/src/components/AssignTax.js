@@ -241,7 +241,7 @@ function AssignTax(props) {
                                         </Typography>
                                         <FormGroup>
                                             {names.map((name) => (
-                                                 <Controller
+                                                <Controller
                                                     name={name}
                                                     control={formChosenNames.control}
                                                     render={({

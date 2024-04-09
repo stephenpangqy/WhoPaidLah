@@ -38,7 +38,8 @@ function CalculatePayments(props) {
 
         if (taxType === 'percent') {
             console.log("Calculating based on percentage")
-            processPaymentListPercent(taxData.taxPercent, names, assigneeReceiptData);
+            let personCostDictList = processPaymentListPercent(taxData.taxPercent, names, assigneeReceiptData);
+            setPaymentList(paymentList => personCostDictList)
         }
         else if (taxType === 'amount') {
             console.log("Calculating based on amount")
@@ -46,6 +47,7 @@ function CalculatePayments(props) {
     },[])
 
     function processPaymentListPercent(taxPercentDecimal, names, assigneeReceiptData) {
+        let personCostDictList = [];
         for (let name of names) {
             let costAmount = 0;
             let stringCost = "";
@@ -65,7 +67,7 @@ function CalculatePayments(props) {
                     if (stringCost !== "") {
                         stringCost += " + "
                     }
-                    stringCost += assigneeReceiptData[i].id.split("$")[0] + "[" + itemCost + "]";
+                    stringCost += assigneeReceiptData[i].id.split("$")[0] + "[$" + itemCost + "]";
                 }
             }
             // Add Percentage Tax
@@ -75,11 +77,33 @@ function CalculatePayments(props) {
             // Check results
             console.log(stringCost);
             console.log(costAmount);
+
+            // Form JavaScript Object
+            let personObj = {};
+            personObj["name"] = name;
+            personObj["totalCost"] = costAmount;
+            personObj["stringCost"] = stringCost;
+            personCostDictList.push(personObj);
         }
+
+        console.log(personCostDictList);
+        console.log(paymentList);
     }
 
     return (
-        <h1>Here are the payments for each person:</h1>
+        <>
+            <h1>Here are the payments for each person:</h1>
+            {paymentList.map((paymentObj) => {
+                <Accordion>
+                    <AccordionSummary>
+                        {paymentObj.name} -- ${paymentObj.totalCost}
+                    </AccordionSummary>
+                    <AccordionDetails>
+                        {paymentObj.stringCost}
+                    </AccordionDetails>
+                </Accordion>
+            })}
+        </>
     );
 }
 
