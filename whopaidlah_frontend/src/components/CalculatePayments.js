@@ -50,7 +50,7 @@ function CalculatePayments(props) {
         let personCostDictList = [];
         for (let name of names) {
             let costAmount = 0;
-            let stringCost = "";
+            let stringCost = "( ";
             for (let i = 1; i < assigneeReceiptData.length; i++) {
                 // Skip index 0, since that is "Assignee" block
                 let paidForItem = false;
@@ -64,15 +64,17 @@ function CalculatePayments(props) {
                     console.log(itemCost);
 
                     costAmount += itemCost;
-                    if (stringCost !== "") {
+                    if (stringCost !== "( ") {
                         stringCost += " + "
                     }
                     stringCost += assigneeReceiptData[i].id.split("$")[0] + "[$" + itemCost + "]";
                 }
             }
+
             // Add Percentage Tax
+            stringCost += " ) x " + (1 + taxPercentDecimal) + " [" + (taxPercentDecimal * 100) + "% tax]"
+
             costAmount = costAmount + costAmount * taxPercentDecimal;
-            stringCost += "\n = " + costAmount;
 
             // Check results
             console.log(stringCost);
@@ -87,13 +89,14 @@ function CalculatePayments(props) {
         }
 
         console.log(personCostDictList);
-        console.log(paymentList);
+
+        return personCostDictList;
     }
 
     return (
         <>
             <h1>Here are the payments for each person:</h1>
-            {paymentList.map((paymentObj) => {
+            {paymentList.map((paymentObj) => (
                 <Accordion>
                     <AccordionSummary>
                         {paymentObj.name} -- ${paymentObj.totalCost}
@@ -102,7 +105,7 @@ function CalculatePayments(props) {
                         {paymentObj.stringCost}
                     </AccordionDetails>
                 </Accordion>
-            })}
+            ))}
         </>
     );
 }
