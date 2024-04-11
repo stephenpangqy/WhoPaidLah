@@ -30,6 +30,7 @@ function CalculatePayments(props) {
         let taxData = props.taxData;
         let names = props.names;
         let assigneeReceiptData = props.assigneeReceiptData;
+        let taxPayees = [];
 
         console.log(taxData);
         console.log(names);
@@ -43,6 +44,7 @@ function CalculatePayments(props) {
         }
         else if (taxType === 'amount') {
             console.log("Calculating based on amount")
+            processPaymentListAmount(taxData, names, assigneeReceiptData);
         }
     },[])
 
@@ -95,8 +97,11 @@ function CalculatePayments(props) {
     }
 
     // Processes Payment based on Tax Amount ($)
-    function processPaymentListAmount() {
+    function processPaymentListAmount(taxAmountDict, names, assigneeReceiptData) {
         // TO DO
+        console.log(taxAmountDict);
+        console.log(names);
+        console.log(assigneeReceiptData);
     }
 
     return (

@@ -39,7 +39,7 @@ function AssignTax(props) {
     const [isEnterTax, setIsEnterTax] = useState(false); // 2nd Scenario - User Prompt there is no tax (No)
 
     const [names, setNames] = useState([]);
-    const [chosenNames, setChosenNames] = useState([]);
+    const [taxPayees, setTaxPayees] = useState([]);
 
     useEffect(() => {   
         let initialTaxData = {};
@@ -94,6 +94,8 @@ function AssignTax(props) {
     const onSubmitChosenNames = (event) => {
         // Start Calculation
         // For some reason, chosenNames not used
+        //////////////////// ISSUE
+        event.preventDefault();
         console.log(event);
 
     }
@@ -126,13 +128,13 @@ function AssignTax(props) {
     function convertToTitleCase(inputString) {
         // Split the input string by underscore
         let words = inputString.split('_');
-      
+    
         // Capitalize the first letter of each word
         let capitalizedWords = words.map(word => word.charAt(0).toUpperCase() + word.slice(1));
-      
+    
         // Join the words back together with a space
         let titleCaseString = capitalizedWords.join(' ');
-      
+    
         return titleCaseString;
     }
     
