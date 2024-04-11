@@ -46,6 +46,7 @@ function CalculatePayments(props) {
         }
     },[])
 
+    // Processes Payment based on Percentage Tax (%)
     function processPaymentListPercent(taxPercentDecimal, names, assigneeReceiptData) {
         let personCostDictList = [];
         for (let name of names) {
@@ -93,18 +94,26 @@ function CalculatePayments(props) {
         return personCostDictList;
     }
 
+    // Processes Payment based on Tax Amount ($)
+    function processPaymentListAmount() {
+        // TO DO
+    }
+
     return (
         <>
             <h1>Here are the payments for each person:</h1>
             {paymentList.map((paymentObj) => (
-                <Accordion>
-                    <AccordionSummary>
-                        {paymentObj.name} -- ${paymentObj.totalCost}
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        {paymentObj.stringCost}
-                    </AccordionDetails>
-                </Accordion>
+                <Grid item xs={12}>
+                    <Accordion sx={{ width: "100%", maxWidth: "70%" }}>
+                        <AccordionSummary>
+                            {paymentObj.name} -- <b>${paymentObj.totalCost.toFixed(2)}</b>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <h4>Cost Calculation:</h4>
+                            {paymentObj.stringCost}
+                        </AccordionDetails>
+                    </Accordion>
+                </Grid>
             ))}
         </>
     );
