@@ -39,6 +39,7 @@ function MainPage() {
 
     const [isCalculation, setIsCalculation] = useState(false);
     const [taxType, setTaxType] = useState('');
+    const [taxPayees, setTaxPayees] = useState([]); // If person decides that only some people are paying for the tax amount
 
     function onClickAddItem() {
         setIsAddItem(true);
@@ -127,6 +128,10 @@ function MainPage() {
         console.log("CALCULATING INDIVIDUAL PAYMENTS");
         console.log(taxData);
         setTaxType(type);
+    }
+
+    function getTaxPayees(taxPayees) {
+        setTaxPayees(taxPayees);
     }
 
     function handleCloseSnackbar() {
@@ -275,11 +280,11 @@ function MainPage() {
                             <Grid item xs={12}>
                                 <h1 sx={{ textAlign: 'center' }}>Assign Taxes</h1>
                             </Grid>
-                            <AssignTax names={names} taxData={taxData} startCalculation={startCalculation} updateTaxData={updateTaxData} />
+                            <AssignTax names={names} taxData={taxData} startCalculation={startCalculation} updateTaxData={updateTaxData} getTaxPayees={getTaxPayees} />
                         </>
                     )
                 ) : (
-                    <CalculatePayments taxType={taxType} taxData={taxData} names={names} assigneeReceiptData={assigneeReceiptData} />
+                    <CalculatePayments taxType={taxType} taxData={taxData} names={names} assigneeReceiptData={assigneeReceiptData} taxPayees={taxPayees} />
                 )
             }
             <Snackbar

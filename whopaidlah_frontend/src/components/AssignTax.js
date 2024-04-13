@@ -84,14 +84,31 @@ function AssignTax(props) {
 
     const handleCheckboxChange = (name) => (event) => {
         const { checked } = event.target;
-        console.log(name);
-        console.log(event.target);
-        console.log(checked);
+
+        let newTaxPayees = [...taxPayees];
+
+        // Add to taxPayees List
+        if (checked === true) {
+            newTaxPayees.push(name)
+        }
+        // Remove from taxPayees List
+        else {
+            let indexToRemove = newTaxPayees.indexOf(name);
+            if (indexToRemove !== -1) {
+                newTaxPayees.splice(indexToRemove, 1);
+            }
+        }
+        setTaxPayees(taxPayees => newTaxPayees);
+        console.log(newTaxPayees);
+
+
         formChosenNames.setValue(name, checked);
-        console.log(formChosenNames);
+        // console.log(formChosenNames);
     };
 
     const onSubmitChosenNames = (event) => {
+        // NOTE: THIS FUNCTION SEEMS TO NOT BE GETTING CALLED AT ALL
+        console.log("SUBMITTING");
         // Start Calculation
         // For some reason, chosenNames not used
         //////////////////// ISSUE
@@ -118,7 +135,9 @@ function AssignTax(props) {
         // percent --> if tax is based on % (e.g. 10% Service, 9% GST)\
         // amount --> if tax is based on amount stated on receipt)
         console.log("Calling StartCalculation(AssignTax)")
-        console.log("Updating Tax Data")
+        
+        // Set the Tax Payees (if applicable)
+        props.getTaxPayees(taxPayees);
         
         props.startCalculation(type);
     }

@@ -30,11 +30,12 @@ function CalculatePayments(props) {
         let taxData = props.taxData;
         let names = props.names;
         let assigneeReceiptData = props.assigneeReceiptData;
-        let taxPayees = [];
+        let taxPayees = props.taxPayees;
 
         console.log(taxData);
         console.log(names);
         console.log(assigneeReceiptData);
+        console.log(taxPayees);
 
 
         if (taxType === 'percent') {
