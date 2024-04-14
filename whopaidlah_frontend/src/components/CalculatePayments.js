@@ -126,27 +126,30 @@ function CalculatePayments(props) {
                     if (stringCost !== "( ") {
                         stringCost += " + "
                     }
-                    stringCost += assigneeReceiptData[i].id.split("$")[0] + "[$" + itemCost + "]";
+                    stringCost += assigneeReceiptData[i].id.split("$")[0] + "[$" + itemCost + "] )";
                 }
             }
 
             /////////// Amount Tax Processing
             let totalTax = 0;
             for (let taxName in taxAmountDict) {
-                totalTax = taxAmountDict[taxName];
+                if (taxAmountDict[taxName] !== null) {
+                    totalTax = taxAmountDict[taxName];
+                }
             }
+
             if (taxPayees.length <= 0) {
                 // No taxPayees means everyone is sharing the tax
 
                 // NEED TO FIX, .length undefined error
                 costAmount += (totalTax / names.length);
-                stringCost += " " + (totalTax / names.length) + " [Total Tax Amount divded by " + names.length + "] ";
+                stringCost += " + (Total Tax Amount divided by " + names.length + ") [" + (totalTax / names.length) + "] ";
             }
             else {
                 // Add tax to cost if they are paying for it
                 if (taxPayees.includes(name)) {
                     costAmount += (totalTax / taxPayees.length);
-                    stringCost += " " + (totalTax / taxPayees.length) + " [Total Tax Amount divded by " + taxPayees.length + " payees] ";
+                    stringCost += " + (Total Tax Amount divided by " + taxPayees.length + " payees) [" + (totalTax / taxPayees.length) + "] ";
                 }
             }
 
