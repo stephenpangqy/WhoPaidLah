@@ -143,13 +143,13 @@ function CalculatePayments(props) {
 
                 // NEED TO FIX, .length undefined error
                 costAmount += (totalTax / names.length);
-                stringCost += " + (Total Tax Amount divided by " + names.length + ") [" + (totalTax / names.length) + "] ";
+                stringCost += " + (Total Tax Amount divided by " + names.length + ") [$" + (totalTax / names.length) + "] ";
             }
             else {
                 // Add tax to cost if they are paying for it
                 if (taxPayees.includes(name)) {
                     costAmount += (totalTax / taxPayees.length);
-                    stringCost += " + (Total Tax Amount divided by " + taxPayees.length + " payees) [" + (totalTax / taxPayees.length) + "] ";
+                    stringCost += " + (Total Tax Amount divided by " + taxPayees.length + " payees) [$" + (totalTax / taxPayees.length) + "] ";
                 }
             }
 
