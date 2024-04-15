@@ -84,12 +84,12 @@ function AssignTax(props) {
 
     const handleCheckboxChange = (name) => (event) => {
         const { checked } = event.target;
-
+        
         let newTaxPayees = [...taxPayees];
-
-        // Add to taxPayees List
+        
+        // add to taxPayees List
         if (checked === true) {
-            newTaxPayees.push(name)
+            newTaxPayees.push(name);
         }
         // Remove from taxPayees List
         else {
@@ -101,9 +101,8 @@ function AssignTax(props) {
         setTaxPayees(taxPayees => newTaxPayees);
         console.log(newTaxPayees);
 
-
         formChosenNames.setValue(name, checked);
-        // console.log(formChosenNames);
+
     };
 
     const onSubmitChosenNames = (event) => {
@@ -139,6 +138,8 @@ function AssignTax(props) {
         // Set the Tax Payees (if applicable)
         props.getTaxPayees(taxPayees);
         
+        // Set the new Tax Payees on MainPage
+        props.getTaxPayees(taxPayees);
         props.startCalculation(type);
     }
 

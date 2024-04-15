@@ -39,7 +39,7 @@ function MainPage() {
 
     const [isCalculation, setIsCalculation] = useState(false);
     const [taxType, setTaxType] = useState('');
-    const [taxPayees, setTaxPayees] = useState([]); // If person decides that only some people are paying for the tax amount
+    const [taxPayees, setTaxPayees] = useState([]); // if person decides for certain people to pay tax only
 
     function onClickAddItem() {
         setIsAddItem(true);
