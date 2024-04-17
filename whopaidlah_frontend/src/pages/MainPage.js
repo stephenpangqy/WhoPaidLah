@@ -64,7 +64,13 @@ function MainPage() {
     }
 
     function addToNames(name) {
-        setNames(names => [...names, name]);
+        if (names.includes(name)) {
+            setOpenSnackbar(true);
+            setErrorMsg("This name has already been added, please add different one!")
+        }
+        else {
+            setNames(names => [...names, name]);
+        }
     }
 
     function addToReceiptData(itemName, quantity, cost) {
