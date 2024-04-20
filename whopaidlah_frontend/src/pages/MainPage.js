@@ -150,18 +150,16 @@ function MainPage() {
         setInfoMsg('');
     }
 
-    function dummyOnClick() {
-        // Dummy function to simulate uploading of data
-        setReceiptData([{'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Triple', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 13.7, 'description': 'ShackBurger Double', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 9.0, 'description': 'Fifty/Fifty(S)', 'quantity': 2.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}, {'tax': 'None', 'amount_line': 6.3, 'description': 'Cheese Fries', 'quantity': 1.0, 'unit_price': 'None', 'unit_type': 'None', 'date': 'None', 'product_code': 'None', 'purchase_order': 'None', 'tax_rate': 'None', 'base_total': 'None', 'sub_total': 'None', 'discount_amount': 'None', 'discount_rate': 'None', 'discount_code': 'None', 'order_number': 'None', 'title': 'None'}])
-        
-        setTaxData({'total_tax': 1.87, 'service_charge': 1.89, 'lucy_charge': null}) // These are the only 2 taxes to account for, if needed.
+    function uploadReceiptData(receiptDataItems, taxItems) {
+        // FOR SOME REASON, IT IS NOT TRIGGERING.
+        console.log(receiptDataItems);
+        console.log(taxItems);
+        setReceiptData(receiptData => receiptDataItems);
+        setTaxData(taxData => taxItems);
     }
 
     useEffect(() => {
-        // Populate ReceiptData
-        if (receiptData.length > 0) {
-            console.log(receiptData[0].description)
-        }
+
     },[receiptData])
 
     useEffect(() => {
@@ -180,8 +178,8 @@ function MainPage() {
                                             No receipt has been uploaded yet.
                                         </Grid>
                                         <Grid item xs={12}>
-                                            {/* <ImageUploader /> */}
-                                            <Button
+                                            <ImageUploader uploadReceiptData={uploadReceiptData} />
+                                            {/* <Button
                                                 component="label"
                                                 role={undefined}
                                                 variant="contained"
@@ -189,7 +187,7 @@ function MainPage() {
                                                 onClick={dummyOnClick}
                                                 >
                                                 Dummy Upload
-                                            </Button>
+                                            </Button> */}
                                         </Grid>
                                     </>
                                 ) : (
@@ -237,8 +235,8 @@ function MainPage() {
                                             <AddNewItem submitNewItem={addToReceiptData} />
                                         )}
                                         <Grid item xs={12}>
-                                            {/* <ImageUploader /> */}
-                                            <Button
+                                            <ImageUploader uploadReceiptData={uploadReceiptData} />
+                                            {/* <Button
                                                 component="label"
                                                 role={undefined}
                                                 variant="contained"
@@ -246,7 +244,7 @@ function MainPage() {
                                                 onClick={dummyOnClick}
                                                 >
                                                 Dummy Re-Upload
-                                            </Button>
+                                            </Button> */}
                                         </Grid>
                                     </>
                                 )

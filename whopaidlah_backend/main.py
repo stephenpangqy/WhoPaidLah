@@ -50,8 +50,6 @@ class ProcessImage(Resource):
             image_path = os.path.join(os.getcwd(), image_file.filename)
             image_file.save(image_path)
             receipt_items = send_ocr_scan(image_path)
-            print(receipt_items)
-
             
             # # Use pytesseract to extract text from the image
             # extracted_text = pytesseract.image_to_string(img, config=pytesseract_config)

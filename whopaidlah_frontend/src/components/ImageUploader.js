@@ -18,7 +18,7 @@ const VisuallyHiddenInput = styled('input')({
     width: 1,
 });
 
-function ImageUploader() {
+function ImageUploader(props) {
     const [uploadedFile, setUploadedFile] = useState(null);
 
     useEffect(() => {
@@ -39,9 +39,18 @@ function ImageUploader() {
             axios.post('http://localhost:5000/whopaidlah/processImage', formData)
             .then(response => {
                 console.log(response);
+                let receiptDataItems = response.data.data[0].item_lines;
+                let serviceTaxAmount = response.data.data[0].payment_information.service_charge;
+                let totalTaxAmount = response.data.data[0].payment_information.total_tax;
+                let taxItems = {"Service Tax": serviceTaxAmount, "Total Tax": totalTaxAmount}
+
+                console.log("Gonna upload data");
+                props.uploadReceiptData(receiptDataItems, taxItems);
+                console.log("Uploaded receipt data");
             })
             .catch(error => {
-
+                console.log("ERROR");
+                console.log(error);
             });
 
         }
