@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import {
     Button,
 } from "@mui/material";
+import {
+    LoadingButton,
+} from "@mui/lab";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
@@ -20,6 +23,8 @@ const VisuallyHiddenInput = styled('input')({
 
 function ImageUploader(props) {
     const [uploadedFile, setUploadedFile] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     useEffect(() => {
     
@@ -27,6 +32,8 @@ function ImageUploader(props) {
 
     const handleImageUpload = (event) => {
         setUploadedFile(event.target.files[0]);
+        setIsLoading(true);
+        setIsDisabled(true);
         let fileName = event.target.files[0].name
         // Check if it is an image (.png, .jpeg, .jpg)
         if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
@@ -57,20 +64,24 @@ function ImageUploader(props) {
         else {
             console.log("This is not an image. Please only upload .jpeg, .jpg or .png files.")
         }
+        setIsLoading(false);
+        setIsDisabled(false);
     };
 
 
     return (
-        <Button
+        <LoadingButton
             component="label"
             role={undefined}
             variant="contained"
             tabIndex={-1}
+            isLoading={isLoading}
+            isDisabled={isDisabled}
             startIcon={<CloudUploadIcon />}
             >
             Upload Image
             <VisuallyHiddenInput onChange={handleImageUpload} type="file" />
-        </Button>
+        </LoadingButton>
     )
 }
 

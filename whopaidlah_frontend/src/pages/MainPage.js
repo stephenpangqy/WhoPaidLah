@@ -151,10 +151,17 @@ function MainPage() {
     }
 
     function uploadReceiptData(receiptDataItems, taxItems) {
-        // FOR SOME REASON, IT IS NOT TRIGGERING.
         console.log(receiptDataItems);
         console.log(taxItems);
-        setReceiptData(receiptData => receiptDataItems);
+        let newReceiptData = [...receiptDataItems];
+        // Remove all zero costing items from the list
+        newReceiptData = newReceiptData.filter(receiptItem => receiptItem.amount_line !== 0);
+        for (let taxName in taxItems) {
+            if (taxItems[taxName] === 0) {
+                delete taxItems[taxName];
+            }
+        }
+        setReceiptData(receiptData => newReceiptData);
         setTaxData(taxData => taxItems);
     }
 
