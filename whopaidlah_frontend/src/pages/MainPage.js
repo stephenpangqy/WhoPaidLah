@@ -20,6 +20,7 @@ import AddNames from '../components/AddNames';
 import AssignItems from '../components/AssignItems';
 import AssignTax from "../components/AssignTax";
 import CalculatePayments from "../components/CalculatePayments";
+import ReceiptDataGrid from "../components/ReceiptDataGrid";
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
@@ -186,15 +187,6 @@ function MainPage() {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <ImageUploader uploadReceiptData={uploadReceiptData} />
-                                            {/* <Button
-                                                component="label"
-                                                role={undefined}
-                                                variant="contained"
-                                                tabIndex={-1}
-                                                onClick={dummyOnClick}
-                                                >
-                                                Dummy Upload
-                                            </Button> */}
                                         </Grid>
                                     </>
                                 ) : (
@@ -219,6 +211,11 @@ function MainPage() {
                                                 </TableBody>
                                             </Table>
                                         </Grid>
+                                        {/*Testing DataGrid */}
+                                        <Grid item xs={12}>
+                                            <ReceiptDataGrid receiptData={receiptData} />
+                                        </Grid>
+                                        {/*Testing DataGrid END */}
                                         <Grid item xs={6}>
                                             Is this all of the items on the receipt? If not, you can manually add by clicking the orange button.
                                         </Grid>

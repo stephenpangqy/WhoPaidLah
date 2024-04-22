@@ -2,7 +2,11 @@ import json
 import requests
 import os
 
-authorization_token = "Bearer " + (os.environ.get('AUTHORIZATION_TOKEN'))
+from dotenv import load_dotenv
+
+load_dotenv()
+
+authorization_token = "Bearer " + (os.environ['AUTHORIZATION_TOKEN'])
 
 def send_ocr_scan(image_path):
     
