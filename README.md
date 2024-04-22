@@ -10,6 +10,7 @@ npm install @emotion/react
 npm install @emotion/styled
 npm install @mui/icons-material
 npm install @mui/lab
+npm install @mui/x-data-grid
 npm install react-hook-form
 npm install axios
 npm install react-beautiful-dnd
