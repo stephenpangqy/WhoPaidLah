@@ -10,20 +10,18 @@ import {
 function ReceiptDataGrid(props) {
     // TO DO
     const [receiptDataRows, setReceiptDataRows] = useState([]);
-    const [columns, setColumns] = useState(["Item", "Quantity", "Cost (Item x Quantity)"]);
+    const [columns, setColumns] = useState([
+        { field: 'description', headerName: 'Item', width: 150, editable: true },
+        { field: 'quantity', headerName: 'Quantity', width: 150, editable: true },
+        { field: 'amount_line', headerName: 'Cost (Item x Quantity)', width: 150, editable: true },
+    ]);
     const [idsToDelete, setIdsToDelete] = useState([]);
     const [primaryKeys, setPrimaryKeys] = useState([]);
 
     const [snackbar, setSnackbar] = useState(null);
 
-    const mutateRow = useMutation();
-
     const processRowUpdate = useCallback(
-		async (newRow) => {
-			const response = await mutateRow(newRow);
-			return response;
-		},
-		[mutateRow, columns, primaryKeys]
+        console.log("Proces Row Update")
 	);
 
     const handleProcessRowUpdateError = useCallback((error) => {
@@ -36,13 +34,19 @@ function ReceiptDataGrid(props) {
         // Populate with initial data
         let newReceiptDataRows = [];
         for (let receiptDataObj of props.receiptData) {
-            console.log(receiptDataObj);
-            if (newReceiptDataRows.find((innerList) => innerList[0] === receiptDataObj.description)) {
-
+            const result = newReceiptDataRows.find((innerList) => innerList[0] === receiptDataObj.description);
+            if (result) {
+                const indexOfRow = newReceiptDataRows.indexOf(result);
+                newReceiptDataRows[indexOfRow].quantity += receiptDataObj.quantity;
+                newReceiptDataRows[indexOfRow].amount_line += receiptDataObj.amount_line;
             }
-            newReceiptDataRows.push([receiptDataObj.description, receiptDataObj.quantity, receiptDataObj.amount_line])
+            else {
+                newReceiptDataRows.push({ id: receiptDataObj.description, quantity: receiptDataObj.quantity, amount_line: receiptDataObj.amount_line })
+            }
         }
         // CONTINUE
+        console.log(newReceiptDataRows);
+        setReceiptDataRows(newReceiptDataRows);
     },[])
     
     return (

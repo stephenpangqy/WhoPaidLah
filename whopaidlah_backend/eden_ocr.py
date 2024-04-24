@@ -22,7 +22,7 @@ def send_ocr_scan(image_path):
     files = {'file': open(image_path, 'rb')}
 
     response = requests.post(url, data=data, files=files, headers=headers)
-    
     result = json.loads(response.text)
+    print(result)
     
     return result['amazon']['extracted_data']
