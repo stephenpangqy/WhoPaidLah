@@ -1,11 +1,13 @@
 import { useEffect, useState, useCallback, useMutation } from "react";
 import {
     Snackbar,
-    Alert
+    Alert,
+    Button,
 } from "@mui/material";
 import { 
     DataGrid,
 } from "@mui/x-data-grid";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function ReceiptDataGrid(props) {
     // TO DO
@@ -18,6 +20,7 @@ function ReceiptDataGrid(props) {
     ]);
     const [idsToDelete, setIdsToDelete] = useState([]);
     const [editRowsModel, setEditRowsModel] = useState({});
+    const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
 
     const [snackbar, setSnackbar] = useState(null);
 
@@ -50,6 +53,9 @@ function ReceiptDataGrid(props) {
 
     const handleCloseSnackbar = () => setSnackbar(null);
 
+    const handleOpenDelCfm = () => setOpenDeleteConfirmation(true);
+	const handleCloseDelCfm = () => setOpenDeleteConfirmation(false);
+
     useEffect(() => {
         // Populate with initial data
         let id_count = 1;
@@ -74,6 +80,15 @@ function ReceiptDataGrid(props) {
     return (
         <div>
             <h1>Testing DATAGRID TABLE</h1>
+            <Button
+                variant="contained"
+                color="error"
+                startIcon={<DeleteIcon />}
+                onClick={handleOpenDelCfm}
+                disabled={idsToDelete.length === 0 ? true : false}
+            >
+                Delete Rows
+            </Button>
             <DataGrid
                 rows={receiptDataRows}
                 columns={columns}
@@ -85,6 +100,7 @@ function ReceiptDataGrid(props) {
 				experimentalFeatures={{ newEditingApi: true }}
                 onSelectionModelChange={(ids) => {
 					setIdsToDelete(ids);
+                    console.log(ids);
 				}}
             />
             {!!snackbar && (
