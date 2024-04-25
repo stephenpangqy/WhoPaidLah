@@ -78,18 +78,18 @@ function MainPage() {
         // Add more fields here if deemed necessary
         let originalReceiptData = [...receiptData];
         console.log(originalReceiptData);
+        // Search for duplicates
         let alreadyExistingObject = originalReceiptData.find(obj => obj.description === itemName)
         if (alreadyExistingObject !== undefined) {
-            alreadyExistingObject.quantity += quantity;
-            alreadyExistingObject.amount_line += cost;
-            console.log(alreadyExistingObject);
-            // needs fixing
+            alreadyExistingObject.quantity += parseInt(quantity);
+            alreadyExistingObject.amount_line += parseFloat(cost);
             setReceiptData(receiptData =>
                 receiptData.map((receiptObj) => {
-                        console.log(receiptObj);
-                        console.log(alreadyExistingObject);
                         if (receiptObj.description === alreadyExistingObject.description) {
                             return alreadyExistingObject;
+                        }
+                        else {
+                            return receiptObj;
                         }
                     }
                 )
@@ -100,11 +100,15 @@ function MainPage() {
         else {
             let dataRow = {
                 'description': itemName,
-                'quantity': quantity,
-                'amount_line': cost
+                'quantity': parseInt(quantity),
+                'amount_line': parseFloat(cost)
             }
             setReceiptData(receiptData => [...receiptData, dataRow]) // Must use this format when modifying lists.
         }
+    }
+
+    function updateMainReceiptData(updatedRows) {
+        setReceiptData(updatedRows);
     }
 
     function updateAssigneeReceiptData(itemDict) {
@@ -191,7 +195,7 @@ function MainPage() {
                                     </>
                                 ) : (
                                     <>
-                                        <Grid item xs={12}>
+                                        {/* <Grid item xs={12}>
                                             <Table sx={{ border: '1px solid black' }}>
                                                 <TableHead>
                                                     <TableRow sx={{ backgroundColor: 'gray' }}>
@@ -210,10 +214,10 @@ function MainPage() {
                                                     ))}
                                                 </TableBody>
                                             </Table>
-                                        </Grid>
+                                        </Grid> */}
                                         {/*Testing DataGrid */}
                                         <Grid item xs={12}>
-                                            <ReceiptDataGrid receiptData={receiptData} />
+                                            <ReceiptDataGrid receiptData={receiptData} updateMainReceiptData={updateMainReceiptData} />
                                         </Grid>
                                         {/*Testing DataGrid END */}
                                         <Grid item xs={6}>
@@ -246,7 +250,7 @@ function MainPage() {
                                                 variant="contained"
                                                 tabIndex={-1}
                                                 onClick={dummyOnClick}
-                                                >
+                                                > 
                                                 Dummy Re-Upload
                                             </Button> */}
                                         </Grid>

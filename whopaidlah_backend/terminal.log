@@ -828,3 +828,52 @@ main.py : ProcessImage Failed. HTTPSConnectionPool(host='api.edenai.run', port=4
 127.0.0.1 - - [25/Apr/2024 00:34:14] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
 127.0.0.1 - - [25/Apr/2024 00:37:02] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
 127.0.0.1 - - [25/Apr/2024 00:40:25] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [25/Apr/2024 10:31:58] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 10:55:47] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\eden_ocr.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [25/Apr/2024 11:31:37] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 12:06:53] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 12:10:32] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 12:22:41] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 12:32:33] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+main.py : ProcessImage Failed. HTTPSConnectionPool(host='api.edenai.run', port=443): Max retries exceeded with url: /v2/ocr/financial_parser (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')))
+127.0.0.1 - - [25/Apr/2024 14:26:15] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+main.py : ProcessImage Failed. HTTPSConnectionPool(host='api.edenai.run', port=443): Max retries exceeded with url: /v2/ocr/financial_parser (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')))
+127.0.0.1 - - [25/Apr/2024 14:26:49] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+ * Detected change in 'C:\\Users\\ASUS\\Documents\\GitHub\\WhoPaidLah\\whopaidlah_backend\\main.py', reloading
+ * Restarting with stat
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+main.py : ProcessImage Failed. HTTPSConnectionPool(host='api.edenai.run', port=443): Max retries exceeded with url: /v2/ocr/financial_parser (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)')))
+127.0.0.1 - - [25/Apr/2024 14:27:37] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 500 -
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 164-524-151
+127.0.0.1 - - [25/Apr/2024 14:32:29] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 14:55:09] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 15:02:47] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 15:13:35] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 15:20:08] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -
+127.0.0.1 - - [25/Apr/2024 15:25:07] "[35m[1mPOST /whopaidlah/processImage HTTP/1.1[0m" 201 -

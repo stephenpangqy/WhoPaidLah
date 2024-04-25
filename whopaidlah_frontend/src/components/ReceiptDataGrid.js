@@ -11,20 +11,40 @@ function ReceiptDataGrid(props) {
     // TO DO
     const [receiptDataRows, setReceiptDataRows] = useState([]);
     const [columns, setColumns] = useState([
+        { field: 'id', headerName: 'ID', width: 90 },
         { field: 'description', headerName: 'Item', width: 150, editable: true },
         { field: 'quantity', headerName: 'Quantity', width: 150, editable: true },
         { field: 'amount_line', headerName: 'Cost (Item x Quantity)', width: 150, editable: true },
     ]);
     const [idsToDelete, setIdsToDelete] = useState([]);
-    const [primaryKeys, setPrimaryKeys] = useState([]);
+    const [editRowsModel, setEditRowsModel] = useState({});
 
     const [snackbar, setSnackbar] = useState(null);
 
-    const processRowUpdate = useCallback(
-        console.log("Proces Row Update")
-	);
+    const processRowUpdate = useCallback((updatedRow) => {
+        console.log("HANDLE EDIT ROWS MODEL CHANGE");
+        console.log(updatedRow);
+        // Update string-ed quantity and amount_line changes back to int and float respectively
+        if (typeof updatedRow.quantity === "string") {
+            updatedRow.quantity = parseInt(updatedRow.quantity);
+        }
+
+        if (typeof updatedRow.amount_line === "string") {
+            updatedRow.amount_line = parseFloat(updatedRow.amount_line);
+        }
+        const updatedRows = receiptDataRows.map((row) =>
+            row.id === updatedRow.id ? { ...row, ...updatedRow } : row
+        );
+        setReceiptDataRows((prevRows) => updatedRows);
+        // update ReceiptData in MainPage.js
+        props.updateMainReceiptData(updatedRows);
+
+        console.log(updatedRows);
+        return updatedRow;
+    }, [receiptDataRows]); // Add receiptDataRows as a dependency to ensure the function has access to receiptDataRows state
 
     const handleProcessRowUpdateError = useCallback((error) => {
+        console.log(error);
 		setSnackbar({ children: error.message, severity: "error" });
 	}, []);
 
@@ -32,22 +52,24 @@ function ReceiptDataGrid(props) {
 
     useEffect(() => {
         // Populate with initial data
+        let id_count = 1;
         let newReceiptDataRows = [];
         for (let receiptDataObj of props.receiptData) {
-            const result = newReceiptDataRows.find((innerList) => innerList[0] === receiptDataObj.description);
+            const result = newReceiptDataRows.find((innerObj) => innerObj.description === receiptDataObj.description);
             if (result) {
                 const indexOfRow = newReceiptDataRows.indexOf(result);
                 newReceiptDataRows[indexOfRow].quantity += receiptDataObj.quantity;
                 newReceiptDataRows[indexOfRow].amount_line += receiptDataObj.amount_line;
             }
             else {
-                newReceiptDataRows.push({ id: receiptDataObj.description, quantity: receiptDataObj.quantity, amount_line: receiptDataObj.amount_line })
+                newReceiptDataRows.push({ id: id_count, description: receiptDataObj.description, quantity: receiptDataObj.quantity, amount_line: receiptDataObj.amount_line })
+                id_count++;
             }
         }
-        // CONTINUE
+
         console.log(newReceiptDataRows);
         setReceiptDataRows(newReceiptDataRows);
-    },[])
+    },[props.receiptData])
     
     return (
         <div>
@@ -56,8 +78,8 @@ function ReceiptDataGrid(props) {
                 rows={receiptDataRows}
                 columns={columns}
                 setIdsToDelete={setIdsToDelete}
-                getRowId={(row) => primaryKeys.map((pk) => row[pk]).join(",")}
 				checkboxSelection={true}
+                editRowsModel={editRowsModel}
                 processRowUpdate={processRowUpdate}
                 onProcessRowUpdateError={handleProcessRowUpdateError}
 				experimentalFeatures={{ newEditingApi: true }}
