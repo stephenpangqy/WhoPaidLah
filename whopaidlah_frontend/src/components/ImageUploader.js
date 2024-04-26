@@ -75,8 +75,8 @@ function ImageUploader(props) {
             role={undefined}
             variant="contained"
             tabIndex={-1}
-            isLoading={isLoading}
-            isDisabled={isDisabled}
+            loading={isLoading}
+            disabled={isDisabled}
             startIcon={<CloudUploadIcon />}
             >
             Upload Image

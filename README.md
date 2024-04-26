@@ -40,3 +40,6 @@ https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
 EDEN AI:
 https://app.edenai.run/bricks/ocr/ocr-receipt
 https://www.youtube.com/watch?v=NrSjwk1jBy4&t=2s&ab_channel=EdenAI
+
+REFERENCES:
+https://stackoverflow.com/questions/66399667/material-ui-datagrid-checkbox-row-selection-is-not-working

@@ -3,7 +3,16 @@ import {
     Snackbar,
     Alert,
     Button,
+    Dialog,
+    DialogTitle,
+    DialogContent,
+    DialogContentText,
+    DialogActions,
+
 } from "@mui/material";
+import {
+    LoadingButton,
+} from "@mui/lab";
 import { 
     DataGrid,
 } from "@mui/x-data-grid";
@@ -21,6 +30,8 @@ function ReceiptDataGrid(props) {
     const [idsToDelete, setIdsToDelete] = useState([]);
     const [editRowsModel, setEditRowsModel] = useState({});
     const [openDeleteConfirmation, setOpenDeleteConfirmation] = useState(false);
+    const [isDisabledDelete, setIsDisabledDelete] = useState(false);
+    const [isLoadingDelete, setIsLoadingDelete] = useState(false);
 
     const [snackbar, setSnackbar] = useState(null);
 
@@ -56,6 +67,19 @@ function ReceiptDataGrid(props) {
     const handleOpenDelCfm = () => setOpenDeleteConfirmation(true);
 	const handleCloseDelCfm = () => setOpenDeleteConfirmation(false);
 
+    const handleDelete = () => {
+		setIsLoadingDelete(true);
+		setIsDisabledDelete(true);
+
+        const remainingReceiptRows = receiptDataRows.filter(row => !idsToDelete.includes(row.id))
+        setReceiptDataRows((prevRows) => remainingReceiptRows);
+        props.updateMainReceiptData(remainingReceiptRows);
+
+        setIsLoadingDelete(false);
+		setIsDisabledDelete(false);
+        setOpenDeleteConfirmation(false);
+    }
+
     useEffect(() => {
         // Populate with initial data
         let id_count = 1;
@@ -87,7 +111,7 @@ function ReceiptDataGrid(props) {
                 onClick={handleOpenDelCfm}
                 disabled={idsToDelete.length === 0 ? true : false}
             >
-                Delete Rows
+                Delete Items
             </Button>
             <DataGrid
                 rows={receiptDataRows}
@@ -98,7 +122,7 @@ function ReceiptDataGrid(props) {
                 processRowUpdate={processRowUpdate}
                 onProcessRowUpdateError={handleProcessRowUpdateError}
 				experimentalFeatures={{ newEditingApi: true }}
-                onSelectionModelChange={(ids) => {
+                onRowSelectionModelChange={(ids) => {
 					setIdsToDelete(ids);
                     console.log(ids);
 				}}
@@ -112,6 +136,29 @@ function ReceiptDataGrid(props) {
 					<Alert {...snackbar} onClose={handleCloseSnackbar} />
 				</Snackbar>
 			)}
+            <Dialog open={openDeleteConfirmation} onClose={handleCloseDelCfm}>
+				<DialogTitle id="alert-dialog-title">Delete Items?</DialogTitle>
+				<DialogContent>
+					<DialogContentText id="alert-dialog-description">
+						Are you sure you want to delete the selected items and their cost from the table?
+					</DialogContentText>
+				</DialogContent>
+				<DialogActions>
+					<Button onClick={handleCloseDelCfm} disabled={isDisabledDelete}>
+						Close
+					</Button>
+					<LoadingButton
+						onClick={handleDelete}
+						autoFocus
+						variant="outlined"
+						color="error"
+						loading={isLoadingDelete}
+						disabled={isDisabledDelete}
+					>
+						Confirm
+					</LoadingButton>
+				</DialogActions>
+			</Dialog>
         </div>
     );
 }
