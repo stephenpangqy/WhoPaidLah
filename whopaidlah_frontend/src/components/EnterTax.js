@@ -31,6 +31,8 @@ function EnterTax(props) {
         console.log(tax_name);
         console.log(tax_amount);
         console.log(tax_percent);
+
+        props.addTaxRow(tax_name, tax_amount, tax_percent);
     }
 
     return (
@@ -52,6 +54,7 @@ function EnterTax(props) {
                                         value={value}
                                         label={"Tax Name"}
                                         error={!!error}
+                                        required
                                         helperText={error ? error.message : null}
                                     />
                                 )}
@@ -60,6 +63,7 @@ function EnterTax(props) {
                                 }}
                             />
                         </Stack>
+                        <br />
                         <Stack spacing={2}>
                             <Controller
                                 name={"tax_amount"}
@@ -73,6 +77,7 @@ function EnterTax(props) {
                                         onChange={onChange}
                                         value={value}
                                         required
+                                        label={"Tax Amount"}
                                         InputProps={{
                                             startAdornment:
                                                 <InputAdornment
@@ -96,13 +101,14 @@ function EnterTax(props) {
                         >
                             Enter Amount
                         </Button>
-                        <Button
+                        {/* For now, comment out and only allow adding of Tax Amount */}
+                        {/* <Button
                             variant="outlined"
                             color="primary"
                             onClick={onClickToggleAdd}
                         >
                             Change to Add Percentage Tax (%)
-                        </Button>
+                        </Button> */}
                     </>
                 ) : (
                     <>

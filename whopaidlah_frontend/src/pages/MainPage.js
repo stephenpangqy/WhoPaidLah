@@ -129,8 +129,20 @@ function MainPage() {
         setOpenSnackbar(false);
     }
 
-    function updateTaxData(newTaxData) {
+    // Replaces TaxData with % Tax
+    function updateTaxData(newTaxRows) {
+        // reformat newTaxRows
+        let newTaxData = {};
+        for (let taxRow of newTaxRows) {
+            newTaxData[taxRow.tax_name] = taxRow.amount;
+        }
         setTaxData(newTaxData);
+    }
+
+    function addTaxData(newTaxRow) {
+        let newTaxData = taxData;
+        let finalTaxData = {...newTaxData, ...newTaxRow}
+        setTaxData(prevTaxData => finalTaxData);
     }
 
     function startCalculation(type) {
@@ -195,26 +207,6 @@ function MainPage() {
                                     </>
                                 ) : (
                                     <>
-                                        {/* <Grid item xs={12}>
-                                            <Table sx={{ border: '1px solid black' }}>
-                                                <TableHead>
-                                                    <TableRow sx={{ backgroundColor: 'gray' }}>
-                                                        <TableCell>Item</TableCell>
-                                                        <TableCell>Quantity</TableCell>
-                                                        <TableCell>Cost (Item x Quantity)</TableCell>
-                                                    </TableRow>
-                                                </TableHead>
-                                                <TableBody>
-                                                    {receiptData.map((receiptRow) => (
-                                                        <TableRow key={receiptRow.id}>
-                                                            <TableCell>{receiptRow.description}</TableCell>
-                                                            <TableCell>{receiptRow.quantity}</TableCell>
-                                                            <TableCell>{receiptRow.amount_line}</TableCell>
-                                                        </TableRow>
-                                                    ))}
-                                                </TableBody>
-                                            </Table>
-                                        </Grid> */}
                                         {/*Testing DataGrid */}
                                         <Grid item xs={12}>
                                             <ReceiptDataGrid receiptData={receiptData} updateMainReceiptData={updateMainReceiptData} />
@@ -292,7 +284,7 @@ function MainPage() {
                             <Grid item xs={12}>
                                 <h1 sx={{ textAlign: 'center' }}>Assign Taxes</h1>
                             </Grid>
-                            <AssignTax names={names} taxData={taxData} startCalculation={startCalculation} updateTaxData={updateTaxData} getTaxPayees={getTaxPayees} />
+                            <AssignTax names={names} taxData={taxData} startCalculation={startCalculation} updateTaxData={updateTaxData} getTaxPayees={getTaxPayees} addTaxData={addTaxData} />
                         </>
                     )
                 ) : (
