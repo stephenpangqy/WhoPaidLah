@@ -188,7 +188,7 @@ function AssignTax(props) {
         // Start Calculation
         console.log(taxPercent);
         let taxPercentFloat = parseFloat(taxPercent) / 100
-        let newTaxData = { 'taxPercent': taxPercentFloat }
+        let newTaxData = [{ 'tax_name': 'Tax Percentage', 'amount': taxPercentFloat }]
         props.updateTaxData(newTaxData)
         startCalculation('percent');
     }

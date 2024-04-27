@@ -76,11 +76,11 @@ class ProcessImage(Resource):
             return {
                 "message": f"ProcessImage failed. {e.args[0]}"
             }, 500
-        # finally:
-        #     # Remove the file after processing
-        #     if os.path.exists(image_path):
-        #         os.remove(image_path)
-                # print(f'File {image_path} removed successfully')
+        finally:
+            # Remove the file after processing
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                print(f'File {image_path} removed successfully')
 
 
 # Namespaces for API Route Categorization ############################

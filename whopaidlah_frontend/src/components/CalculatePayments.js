@@ -34,13 +34,14 @@ function CalculatePayments(props) {
 
         console.log(taxData);
         console.log(names);
+        console.log(taxType);
         console.log(assigneeReceiptData);
         console.log(taxPayees);
 
 
         if (taxType === 'percent') {
             console.log("Calculating based on percentage")
-            let personCostDictList = processPaymentListPercent(taxData.taxPercent, names, assigneeReceiptData);
+            let personCostDictList = processPaymentListPercent(taxData["Tax Percentage"], names, assigneeReceiptData);
             setPaymentList(paymentList => personCostDictList)
         }
         else if (taxType === 'amount') {
@@ -134,7 +135,7 @@ function CalculatePayments(props) {
             let totalTax = 0;
             for (let taxName in taxAmountDict) {
                 if (taxAmountDict[taxName] !== null) {
-                    totalTax = taxAmountDict[taxName];
+                    totalTax += taxAmountDict[taxName];
                 }
             }
 

@@ -133,6 +133,7 @@ function MainPage() {
     function updateTaxData(newTaxRows) {
         // reformat newTaxRows
         let newTaxData = {};
+        console.log(newTaxRows);
         for (let taxRow of newTaxRows) {
             newTaxData[taxRow.tax_name] = taxRow.amount;
         }
