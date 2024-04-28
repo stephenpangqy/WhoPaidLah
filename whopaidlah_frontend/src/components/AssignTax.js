@@ -457,10 +457,10 @@ function AssignTax(props) {
                     ) : (
                         <>
                             <h1>Add Tax Manually now </h1>
-                            <EnterTax />
+                            <EnterTax addTaxRow={addTaxRow} />
 
                         </>
-                    )
+                    ) 
                 )
 
             }
