@@ -19,7 +19,6 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 
 function ReceiptDataGrid(props) {
-    // TO DO
     const [receiptDataRows, setReceiptDataRows] = useState([]);
     const [columns, setColumns] = useState([
         { field: 'id', headerName: 'ID', width: 90 },

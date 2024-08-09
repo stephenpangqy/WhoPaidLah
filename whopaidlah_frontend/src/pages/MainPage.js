@@ -21,6 +21,7 @@ import AssignItems from '../components/AssignItems';
 import AssignTax from "../components/AssignTax";
 import CalculatePayments from "../components/CalculatePayments";
 import ReceiptDataGrid from "../components/ReceiptDataGrid";
+import Intro from "../components/Intro";
 
 function MainPage() {
     const [receiptData, setReceiptData] = useState([]);
@@ -200,7 +201,7 @@ function MainPage() {
                                 receiptData.length === 0 ? (
                                     <>
                                         <Grid item xs={12}>
-                                            No receipt has been uploaded yet.
+                                            <Intro />
                                         </Grid>
                                         <Grid item xs={12}>
                                             <ImageUploader uploadReceiptData={uploadReceiptData} />
