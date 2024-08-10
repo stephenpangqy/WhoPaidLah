@@ -8,6 +8,7 @@ import {
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import axios from 'axios';
+import "../App.css";
 
 const VisuallyHiddenInput = styled('input')({
     clip: 'rect(0 0 0 0)',
@@ -70,18 +71,20 @@ function ImageUploader(props) {
 
 
     return (
-        <LoadingButton
-            component="label"
-            role={undefined}
-            variant="contained"
-            tabIndex={-1}
-            loading={isLoading}
-            disabled={isDisabled}
-            startIcon={<CloudUploadIcon />}
-            >
-            Upload Image
-            <VisuallyHiddenInput onChange={handleImageUpload} type="file" />
-        </LoadingButton>
+        <div class="upload-container">
+            <LoadingButton
+                component="label"
+                role={undefined}
+                variant="contained"
+                tabIndex={-1}
+                loading={isLoading}
+                disabled={isDisabled}
+                startIcon={<CloudUploadIcon />}
+                >
+                Upload Receipt
+                <VisuallyHiddenInput onChange={handleImageUpload} type="file" />
+            </LoadingButton>
+        </div>
     )
 }
 
