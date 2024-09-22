@@ -21,9 +21,9 @@ import "../App.css"
 function Intro() {
     return (
         <Stack spacing={2}>
-            <div class="title-container">
+            <div className="title-container">
                 <h1>WhoPaidLah?</h1>
-                <p>Your one quick solution to split the cost between friends and family accurately and flexibly.</p>
+                <p>Your one quick solutioxn to split the cost between friends and family accurately and flexibly.</p>
                 <h2>Q: What is this?</h2>
                 <p>WhoPaidLah is a web application that helps you to divide the cost of a meal or other purchases by simply uploading the receipt and customizing.</p>
                 <h2>Q: How does it work?</h2>

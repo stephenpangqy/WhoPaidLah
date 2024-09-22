@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import {
     Button,
+    Snackbar,
+    Alert,
 } from "@mui/material";
 import {
     LoadingButton,
@@ -26,6 +28,13 @@ function ImageUploader(props) {
     const [uploadedFile, setUploadedFile] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [snackbarMsg, setSnackbarMsg] = useState('');
+
+    function handleCloseSnackbar() {
+        setOpenSnackbar(false);
+        setSnackbarMsg('');
+    }
 
     useEffect(() => {
     
@@ -38,7 +47,6 @@ function ImageUploader(props) {
         let fileName = event.target.files[0].name
         // Check if it is an image (.png, .jpeg, .jpg)
         if (fileName.endsWith('.png') || fileName.endsWith('.jpg') || fileName.endsWith('jpeg')) {
-            console.log("File is image");
             // Process File and send to API Endpoint for image processing
             // Send to backend to process image
             console.log(event.target.files[0])
@@ -51,19 +59,17 @@ function ImageUploader(props) {
                 let serviceTaxAmount = response.data.data[0].payment_information.service_charge;
                 let totalTaxAmount = response.data.data[0].payment_information.total_tax;
                 let taxItems = {"Service Tax": serviceTaxAmount, "Total Tax": totalTaxAmount}
-
-                console.log("Gonna upload data");
                 props.uploadReceiptData(receiptDataItems, taxItems);
-                console.log("Uploaded receipt data");
             })
             .catch(error => {
-                console.log("ERROR");
-                console.log(error);
+                setOpenSnackbar(true);
+                setSnackbarMsg(error.message);
             });
 
         }
         else {
-            console.log("This is not an image. Please only upload .jpeg, .jpg or .png files.")
+            setOpenSnackbar(true);
+            setSnackbarMsg("This is not an image. Please only upload .jpeg, .jpg or .png files.");
         }
         setIsLoading(false);
         setIsDisabled(false);
@@ -71,7 +77,7 @@ function ImageUploader(props) {
 
 
     return (
-        <div class="upload-container">
+        <div className="upload-container">
             <LoadingButton
                 component="label"
                 role={undefined}
@@ -84,6 +90,14 @@ function ImageUploader(props) {
                 Upload Receipt
                 <VisuallyHiddenInput onChange={handleImageUpload} type="file" />
             </LoadingButton>
+            <Snackbar open={openSnackbar}>
+                <Alert onClose={handleCloseSnackbar}
+                    severity="error"
+                    variant="filled"
+                >
+                    {snackbarMsg}
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
